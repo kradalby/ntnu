@@ -1,0 +1,54 @@
+// a) Hensikten med innkapsling er at man skal kunne kontrollere og gi riktig tilgang til feltene i et objekt.
+
+// b)
+
+public class Date {
+    private int day;
+    private int month;
+    private int year;
+
+    public Date(int day, int month, int year) {
+        this.setDay(day);
+        this.setMonth(month);
+        this.setYear(year);
+    }
+
+    public void setDay(int day) {
+        if (day <= 1 && day >= 31) {
+            this.day = day;
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    public void setMonth(int month) {
+        if (month <= 1 && month >= 12) {
+            this.month = month;
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    public void setYear(int year) {
+        if (year >= 0 && year <= 2013) {
+            this.year = year;
+        } else {
+            throw new InvalidArgumentException();
+        }
+    }
+
+    public int getDay() {
+        return this.day;
+    }
+
+    public int getMonth() {
+        return this.month;
+    }
+
+    public int getYear() {
+        return this.year;
+    }
+
+    public int 
+
+}

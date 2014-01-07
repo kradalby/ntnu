@@ -1,0 +1,4 @@
+1. 
+a. A i ascii har binær verdi 100001 og titalls verdi 65
+b. L i s p
+c. Metadata er data som beskriver hva en annen data er. feks nettsider.

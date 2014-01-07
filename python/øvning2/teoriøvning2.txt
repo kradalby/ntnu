@@ -1,0 +1,46 @@
+(Oppgave 1)
+a.
+ To forskjeller på ram og harddisk: RAM er kun
+ lagret så lenge det er strøm i kretsene og harddisken består av mekaniske deler.
+b.
+ Den viktigste forskjellen på ROM og RAM er at
+ ROM er Read ONLY memory, som vil si den ikke skal kunne skrives
+ til. Mens RAM så og si kun er der for å skrives til/mellom lagres til.
+c.
+ Fordelen med tilfeldig aksess fremfor sekvensiell
+ aksess er at man ikke bør vente på å komme til den aktuelle
+ plassen man skal lagre. Du kan hoppe rett til et ledig punkt istede får å kjøre gjennom
+ og lete etter et ledig spor som med en kassett.
+d1.
+ stuff er navnet på funksjonen som blir definert.
+ X er input til funksjonen.
+d2.
+ feil 1, ikke kolon etter første linjen hvor man definerer.
+ feil 2, det er ikke brukt gåseøyne på begge sider av input biten,
+ det er brukt to forskjellig. feil 3. inputen blir ikke
+ gjort om fra string til integer og kan derfår ikke brukes i et mattestykke.
+Oppgave 2
+a.
+ Det kommer til å bli skrevet ut tall i par, i
+følgende rekkefølge: 7,3  5,4  5,3  7,3
+b.
+ Verdiene som vises blir vist av følgende grunn;
+ 7,3 blir definert som en lokal variabel i main, den blir
+ derfor printet når main kjører print x y, 5,4 blir
+ printet som et resultat av at main kaller opp
+ funksjonen miks som selv har definert disse tallene
+ som lokale variabler. 5,3 blir vist når main
+ kaller opp funksjonen tull, som
+ ikke har noen lokale variabler definert og henter
+ derfor de globale variablene. og til
+ slutt vises 7,3 fordi main printer igjen og de lokale
+ variablene til main blir brukt.
+
+
+
+
+Biler
+Netto prisen på Ford Mondeo 1.8 er beregnet til:  249594.0
+Netto prisen på Ford Mondeo 1.0 er beregnet til:  211893.5
+Netto prisen på BMW M5 3.0 er beregnet til:  773682.0
+Netto prisen på BMW M5 1.3 er beregnet til:  523989.0

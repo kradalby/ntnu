@@ -1,0 +1,12 @@
+Øvning 3
+
+1. Forskjellen på et høynivå og et lavnivå språk er at "avstanden" fra maskinvaren. Et eksempel på høynivå språk er python, her kan du programere uten å måtte tenke på ting som minne kontroll. I et lavnivå språk er det veldig få lag mellom koden du skriver og koden maskinen leser, man er nesten helt på bunnen.
+
+2. Programtelleren er funksjonen som holder oversikten på hvor programmet er i syklusen det skal gjennom for å fullføre.
+
+3. En kompilator oversetter programkode til maskinkode.
+
+3c. 10 som er radiusen vi mater funksjonen med er i denne sammenhengen et argument. Forskjellen på argument og paramterer er at argument er det du gir til en funksjon som du vil den skal bruke og paramter er "variablen" du har definert som funksjonen skal bruke for å mota og bruke argumentet.
+
+3e. Kode snutten vil printe 4 og 1.
+
