@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
@@ -159,6 +160,42 @@ void biggestDouble() {
         cout << "they are the same" << endl;
     }
 }
+
+/* End of assignment 4 */
+
+
+
+/* Start of assignment 5 */
+
+int internalSum(int a, int b, int c) {
+    int result;
+    result = pow(b, 2) - (4 * a * c);
+    return result;
+}
+
+double positiveSqrt(double n) {
+    if (sqrt(n) < 0) {
+        return -1;
+    } else {
+        return sqrt(n);
+    }
+}
+
+double polyRoot(int a, int b, int c) {
+    return positiveSqrt(internalSum(a, b, c));
+}
+
+
+void abcFormula(int a, int b, int c) {
+    if (internalSum(a, b, c) < 0) {
+        cout << "There is no answer" << endl;
+    } else if (polyRoot(a, b, c) == 0) {
+        
+    } else if (polyRoot(a, b, c) != 0) {
+    
+    }
+}
+
 
 int main() {
     int choice;
