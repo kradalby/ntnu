@@ -167,8 +167,8 @@ void biggestDouble() {
 
 /* Start of assignment 5 */
 
-int internalSum(int a, int b, int c) {
-    int result;
+double internalSum(double a, double b, double c) {
+    double result;
     result = pow(b, 2) - (4 * a * c);
     return result;
 }
@@ -181,20 +181,57 @@ double positiveSqrt(double n) {
     }
 }
 
-double polyRoot(int a, int b, int c) {
+double polyRoot(double a, double b, double c) {
     return positiveSqrt(internalSum(a, b, c));
 }
 
 
-void abcFormula(int a, int b, int c) {
+void abcFormula(double a, double b, double c) {
+    double poly = polyRoot(a, b, c);
     if (internalSum(a, b, c) < 0) {
         cout << "There is no answer" << endl;
-    } else if (polyRoot(a, b, c) == 0) {
-        
-    } else if (polyRoot(a, b, c) != 0) {
-    
+    } else if (poly >= 0) {
+        cout << "Svar 1: " << ((-b + poly) / 2*a) << endl;
+        cout << "Svar 2: " << ((-b - poly) / 2*a) << endl;
     }
 }
+
+void solveAndPrintRoots() {
+    double a = getAndReturnDouble();
+    double b = getAndReturnDouble();
+    double c = getAndReturnDouble();
+    abcFormula(a, b, c);
+}
+
+
+/* End of assignment 5 */
+
+
+
+/* Start of assignment 6 */
+
+void calculateLoadPayments() {
+    cout << "Skriv inn et lånebeløp" << endl;
+    double lan = getAndReturnDouble();
+    cout << "Skriv inn renten" << endl;
+    double percentage = getAndReturnDouble();
+    double payment;
+    double remaining = lan;
+    
+    cout << "År\t Innbetaling\t Gjennstående Lån" << endl;
+
+    for (int i = 0; i < 10; i++) {
+        payment = ((lan / 10) + (percentage/100)) * remaining;
+        remaining = lan - payment;
+        cout << i+1 << "\t" << payment << "\t" << remaining << endl;
+
+    } 
+}
+
+
+/* End of assignment 6 */
+
+
 
 
 int main() {
@@ -209,7 +246,9 @@ int main() {
         cout << "6) Resturangpriskalkulator" << endl;
         cout << "7) Tallsjekk" << endl;
         cout << "8) Finn største desimal" << endl;
-        cout << "Angi valg (0-8):" << endl;
+        cout << "9) Løs en annengradsligning" << endl;
+        cout << "10) Kalkuler lån" << endl;
+        cout << "Angi valg (0-10):" << endl;
         
         cin >> choice;
 
@@ -229,9 +268,11 @@ int main() {
             isEven();
         } else if (choice == 8) {
             biggestDouble();
+        } else if (choice == 9) {
+            solveAndPrintRoots();
+        } else if (choice == 10) {
+            calculateLoadPayments();
         }
-
     }
-
     return 0;
 }
