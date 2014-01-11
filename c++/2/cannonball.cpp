@@ -35,7 +35,7 @@ double posY(double startSpeed, double time) {
 double posIntY(double startSpeed, double time);
 
 double posX(double startSpeed, double time) {
-    return 0 + (startSpeed * time) + ((1/2) * acclX() * pow(time, 2));
+    return 0 + (startSpeed * time) + (0.5 * acclX() * pow(time, 2.0));
 }
 
 double posIntX(double startSpeed, double time);
