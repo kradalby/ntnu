@@ -22,3 +22,12 @@ void getUserInput(double *theta, double *absVelocity);
 double getVelocityX(double theta, double absVelocity); 
 double getVelocityY(double theta, double absVelocity); 
 void getVelocityVector(double theta, double absVelocity, double *velocityX, double *velocityY);
+
+
+double getDistanceTraveled(double velocityX, double velocityY);
+
+double optimalAngleForMaxDistance(double absVelocity);
+
+double targetPractice(double distanceToTarget, double velocityX, double velocityY);
+
+void playTargetPractice();

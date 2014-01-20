@@ -28,12 +28,8 @@ double velY(double startSpeed, double time) {
 double velIntY(double startSpeed, double time);
 
 double posY(double startSpeed, double time) {
-    double a = ((1/2) * acclY() * pow(time, 2));
+    double a = ((0.5) * acclY() * pow(time, 2));
     double b = (startSpeed * time);
-    cout << startSpeed << endl;
-    cout << time << endl;
-    cout << a << endl;
-    cout << b << endl;
     return 0 + b + a;
 }
 
@@ -61,6 +57,8 @@ void printTime(double time) {
 double flightTime(double startSpeedY);
 
 
+
+
 void getUserInput(double *theta, double *absVelocity) {
     cout << "Skriv inn en vinkel: ";
     cin >> *theta;
@@ -77,7 +75,16 @@ double getVelocityY(double theta, double absVelocity) {
 } 
 
 void getVelocityVector(double theta, double absVelocity, double *velocityX, double *velocityY) {
-    *veloictyX = getVelocityX(theta, absVelocity);
-    *veloictyY = getVelocityY(theta, absVelocity);
+    *velocityX = getVelocityX(theta, absVelocity);
+    *velocityY = getVelocityY(theta, absVelocity);
 }
 
+
+double getDistanceTraveled(double velocityX, double velocityY);
+
+
+double optimalAngleForMaxDistance(double absVelocity);
+
+double targetPractice(double distanceToTarget, double velocityX, double velocityY);
+
+void playTargetPractice();

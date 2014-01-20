@@ -7,8 +7,11 @@ using namespace std;
 int main() {
     double speedX = 50.0;
     double speedY = 25.0;
-    double t = 5.0;
+    double t = 2.5;
     
+    cout << t << endl;
+    cout << speedY << endl;
+
     cout << "acclX: " << acclX() << endl;
     cout << "acclY: " << acclY() << endl;
     cout << "velX: " << velX(speedX, t) << endl;
