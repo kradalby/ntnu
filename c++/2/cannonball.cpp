@@ -4,6 +4,11 @@
 
 using namespace std;
 
+double theta;
+double absVelocity;
+double velocityX;
+double velocityY;
+
 double acclY() {
     return -9.81;
 }
@@ -55,4 +60,24 @@ void printTime(double time) {
 
 double flightTime(double startSpeedY);
 
+
+void getUserInput(double *theta, double *absVelocity) {
+    cout << "Skriv inn en vinkel: ";
+    cin >> *theta;
+    cout << "Skriv inn en fart: ";
+    cin >> *absVelocity;
+} 
+
+
+double getVelocityX(double theta, double absVelocity) {
+    return absVelocity * cos(theta);
+} 
+double getVelocityY(double theta, double absVelocity) {
+    return absVelocity * sin(theta);
+} 
+
+void getVelocityVector(double theta, double absVelocity, double *velocityX, double *velocityY) {
+    *veloictyX = getVelocityX(theta, absVelocity);
+    *veloictyY = getVelocityY(theta, absVelocity);
+}
 

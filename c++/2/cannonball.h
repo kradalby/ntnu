@@ -18,3 +18,7 @@ void printTime(double time);
 double flightTime(double startSpeedY);
 
 
+void getUserInput(double *theta, double *absVelocity); 
+double getVelocityX(double theta, double absVelocity); 
+double getVelocityY(double theta, double absVelocity); 
+void getVelocityVector(double theta, double absVelocity, double *velocityX, double *velocityY);
