@@ -6,3 +6,5 @@ a.out
 *.idea/
 *.gch
 *out/
+*tar*
+*zip
