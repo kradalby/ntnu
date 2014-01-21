@@ -1,123 +1,85 @@
 package T2;
 
-import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import com.sun.java.swing.plaf.windows.WindowsGraphicsUtils;
 
-import javax.swing.event.ChangeListener;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
- * Created by kradalby on 11/01/14.
+ * Created by kradalby on 21/01/14.
  */
-public class PersonPanel extends Application {
-
-    private Person model = null;
-
-    private GridPane grid;
-    private Label nameLabel;
-    private Label emailLabel;
-    private Label dateOfBirthLabel;
-    private Label genderLabel;
-    private Label heightLabel;
+public class PersonPanel extends JPanel implements PropertyChangeListener{
 
 
-    private TextField nameField;
-    private TextField emailField;
-    private TextField dateOfBirthField;
+    Person model;
 
+    JLabel nameLabel;
+    JLabel emailLabel;
+    JLabel birthdayLabel;
+    JLabel genderLabel;
+    JLabel heightLabel;
 
-    private ComboBox genderBox;
-
-    private Slider heightSlider;
-
-    ObservableList<Gender> options = FXCollections.observableArrayList(
-            Gender.MAN,
-            Gender.WOMAN
-    );
+    JTextField NamePropertyComponent;
+    JTextField EmailPropertyComponent;
+    JTextField DateOfBirthPropertyComponent;
+    JComboBox<Gender> GenderPropertyComponent;
+    JSlider HeightPropertyComponent;
 
     public PersonPanel() {
-        this.grid = new GridPane();
-        this.grid.setAlignment(Pos.CENTER);
-        this.grid.setHgap(10);
-        this.grid.setVgap(10);
-        this.grid.setPadding(new Insets(25,25,25,25));
 
-        this.nameLabel = new Label("Name:");
-        this.emailLabel = new Label("Email:");
-        this.dateOfBirthLabel = new Label("Birthday:");
-        this.genderLabel = new Label("Gender:");
-        this.heightLabel = new Label("Height");
+        this.nameLabel = new JLabel("Name:");
+        this.emailLabel = new JLabel("Email:");
+        this.birthdayLabel = new JLabel("Birthday:");
+        this.genderLabel = new JLabel("Gender:");
+        this.heightLabel = new JLabel("Height:");
+
+        this.NamePropertyComponent = new JTextField();
+        this.EmailPropertyComponent = new JTextField();
+        this.DateOfBirthPropertyComponent = new JTextField();
+        this.GenderPropertyComponent = new JComboBox<Gender>();
+        this.HeightPropertyComponent = new JSlider(0, 120, 220, 170);
+        HeightPropertyComponent.setPaintTicks(true);
+        HeightPropertyComponent.setPaintLabels(true);
+        HeightPropertyComponent.setPaintTrack(true);
+
+        add(nameLabel);
+        add(emailLabel);
+        add(birthdayLabel);
+        add(genderLabel);
+        add(heightLabel);
+
+        add(NamePropertyComponent);
+        add(EmailPropertyComponent);
+        add(DateOfBirthPropertyComponent);
+        add(GenderPropertyComponent);
+        add(HeightPropertyComponent);
+
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        JPanel panel = new PersonPanel();
+
+        GridLayout grid = new GridLayout(5,2);
+        Container cont = frame.getContentPane();
+        cont.setLayout(grid);
+        frame.add(panel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setSize(400, 200);
+    }
 
 
-        this.nameField = new TextField();
-        this.emailField = new TextField();
-        this.dateOfBirthField = new TextField();
-
-
-
-        this.genderBox = new ComboBox(options);
-
-        this.heightSlider = new Slider();
-        this.heightSlider.setMin(50);
-        this.heightSlider.setMax(230);
-        this.heightSlider.setValue(140);
-        this.heightSlider.setMajorTickUnit(140);
-        this.heightSlider.setShowTickLabels(true);
-        this.heightSlider.setShowTickMarks(true);
-
-        this.grid.add(nameLabel, 0, 1);
-        this.grid.add(nameField, 1, 1);
-        this.grid.add(emailLabel, 0, 2);
-        this.grid.add(emailField, 1, 2);
-        this.grid.add(dateOfBirthLabel, 0, 3);
-        this.grid.add(dateOfBirthField, 1, 3);
-        this.grid.add(genderLabel, 0, 4);
-        this.grid.add(genderBox, 1, 4);
-        this.grid.add(heightLabel, 0, 5);
-        this.grid.add(heightSlider, 1, 5);
-
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
 
     }
 
 
-    public void setModel(Person person) {
-        this.model = person;
-        this.nameField.setText(this.model.getName());
-        this.dateOfBirthField.setText(this.model.getDateOfBirth());
-        this.genderBox.setValue(this.model.getGender());
-        this.emailField.setText(this.model.getEmail());
-        this.heightSlider.setValue(this.model.getHeight());
-    }
-
-    public Person getModel() {
-        return this.model;
-    }
-
-
-
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("herp");
-
-        PersonPanel pp = new PersonPanel();
-        Scene scene = new Scene(pp.grid, 400, 300);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-
-    }
-
-    public static void main(String args[]) {
-        launch(args);
-
+    public void setModel(Person model) {
+        this.model = model;
+        model.addPropertyChangeListener(this);
     }
 }

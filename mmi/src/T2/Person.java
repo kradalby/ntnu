@@ -1,10 +1,14 @@
 package T2;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 /**
  * Created by kradalby on 11/01/14.
  */
 public class Person {
 
+    private PropertyChangeSupport pcs;
     private String name;
     private String dateOfBirth;
     private Gender gender;
@@ -12,12 +16,27 @@ public class Person {
     private Integer height;
 
 
+    public Person(String name, String dateOfBirth, Gender gender, String email, Integer height) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.email = email;
+        this.height = height;
+        pcs = new PropertyChangeSupport(this);
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
+        String oldName = this.name;
         this.name = name;
+        pcs.firePropertyChange("name", oldName, name);
     }
 
     public String getDateOfBirth() {
@@ -25,7 +44,9 @@ public class Person {
     }
 
     public void setDateOfBirth(String dateOfBirth) {
+        String oldDate = this.dateOfBirth;
         this.dateOfBirth = dateOfBirth;
+        pcs.firePropertyChange("dateOfBirth", oldDate, dateOfBirth);
     }
 
     public String getEmail() {
@@ -33,7 +54,9 @@ public class Person {
     }
 
     public void setEmail(String email) {
+        String oldEmail = this.email;
         this.email = email;
+        pcs.firePropertyChange("email", oldEmail, email);
     }
 
     public Integer getHeight() {
@@ -41,7 +64,9 @@ public class Person {
     }
 
     public void setHeight(Integer height) {
+        Integer oldHeight = this.height;
         this.height = height;
+        pcs.firePropertyChange("height", oldHeight, height);
     }
 
     public Gender getGender() {
@@ -49,6 +74,9 @@ public class Person {
     }
 
     public void setGender(Gender gender) {
+        Gender oldGender = this.gender;
         this.gender = gender;
+        pcs.firePropertyChange("gender", oldGender, gender);
     }
+
 }
