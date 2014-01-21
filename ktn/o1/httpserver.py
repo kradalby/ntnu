@@ -26,10 +26,16 @@ while True:
     try:
         message = connectionSocket.recv(1024)
         print(message)
-        filename = message.split()[1]
+
+        #Handling empty requests
+        if len(message) == 0:
+            filename = b'/'
+        else: 
+            filename = message.split()[1]
+        
         print(filename)
 
-        if filename == '/':
+        if filename == b'/' or filename == b'':
             filename = 'index.html'
         else:
             filename = filename[1:]
@@ -37,11 +43,12 @@ while True:
         f = open(filename)
         outputdata = f.read() 
         print(outputdata)
+        print(bytes(outputdata, 'utf-8'))
 
-        connectionSocket.send('HTTP/1.1 200 OK')
-        connectionSocket.send('Content-Type: text/html; charset=UTF-8')
-        connectionSocket.send('Connection: close')
-        connectionSocket.send(outputdata)
+        connectionSocket.send(bytes('HTTP/1.1 200 OK\n\r', 'utf-8'))
+        connectionSocket.send(bytes('Content-Type: text/html; charset=UTF-8\n\r', 'utf-8'))
+        connectionSocket.send(bytes('Connection: close\n\r', 'utf-8'))
+        connectionSocket.send(bytes(outputdata, 'utf-8'))
 
         #for i in range(0, len(outputdata)): 
         #    connectionSocket.send(bytes(outputdata[i], 'utf-8'))
