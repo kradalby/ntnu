@@ -8,3 +8,5 @@ a.out
 *out/
 *tar*
 *zip
+*.xcodeproj/
+*.xcworkspace/
