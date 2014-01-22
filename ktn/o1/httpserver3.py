@@ -43,14 +43,15 @@ while True:
         f = open(filename)
         outputdata = f.read() 
         print(outputdata)
+        print(bytes(outputdata, 'utf-8'))
 
-        connectionSocket.send('HTTP/1.0 200 OK\r\n')
-        connectionSocket.send('Content-Type: text/html; charset=UTF-8\n\r')
-        connectionSocket.send('Connection: close\n\r')
-        connectionSocket.send(outputdata)
+        #connectionSocket.send(bytes('HTTP/1.1 200 OK\n\r', 'utf-8'))
+        connectionSocket.send(bytes('Content-Type: text/html; charset=UTF-8\n\r', 'utf-8'))
+        connectionSocket.send(bytes('Connection: close\n\r', 'utf-8'))
+        connectionSocket.send(bytes(outputdata, 'utf-8'))
 
         #for i in range(0, len(outputdata)): 
-        #    connectionSocket.send(bytes(outputdata[i])
+        #    connectionSocket.send(bytes(outputdata[i], 'utf-8'))
 
         print("200 sent")
 
@@ -59,10 +60,10 @@ while True:
     except IOError as e:
         print(e)
 
-        connectionSocket.send('HTTP/1.1 500 Internal Server Error')
-        connectionSocket.send('Content-Type: text/html; charset=UTF-8')
-        connectionSocket.send('Connection: close')
-        connectionSocket.send('<h1>500 Internal Server Error</h1>')
+        connectionSocket.send(bytes('HTTP/1.1 500 Internal Server Error', 'utf-8'))
+        connectionSocket.send(bytes('Content-Type: text/html; charset=UTF-8', 'utf-8'))
+        connectionSocket.send(bytes('Connection: close', 'utf-8'))
+        connectionSocket.send(bytes('<h1>500 Internal Server Error</h1>', 'utf-8'))
         
         print("500 sent")
 
@@ -70,10 +71,10 @@ while True:
     except FileNotFoundError as e:
         print(e)
 
-        connectionSocket.send('HTTP/1.1 404 Not Found')
-        connectionSocket.send('Content-Type: text/html; charset=UTF-8')
-        connectionSocket.send('Connection: close')
-        connectionSocket.send('<h1>404 file not found</h1>')
+        connectionSocket.send(bytes('HTTP/1.1 404 Not Found', 'utf-8'))
+        connectionSocket.send(bytes('Content-Type: text/html; charset=UTF-8', 'utf-8'))
+        connectionSocket.send(bytes('Connection: close', 'utf-8'))
+        connectionSocket.send(bytes('<h1>404 file not found</h1>', 'utf-8'))
         
         print("404 sent")
         
