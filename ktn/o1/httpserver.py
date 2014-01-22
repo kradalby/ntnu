@@ -42,11 +42,15 @@ while True:
 
         f = open(filename)
         outputdata = f.read() 
+
+        header = """
+Content-Type: text/html; charset=UTF-8
+Connection: close"""
+
+        print(header)
         print(outputdata)
 
-        connectionSocket.send('HTTP/1.0 200 OK\r\n')
-        connectionSocket.send('Content-Type: text/html; charset=UTF-8\n\r')
-        connectionSocket.send('Connection: close\n\r')
+        connectionSocket.send(header)
         connectionSocket.send(outputdata)
 
         #for i in range(0, len(outputdata)): 
