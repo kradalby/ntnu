@@ -38,8 +38,8 @@ public class PersonPanelFX extends Application {
     private Slider heightSlider;
 
     ObservableList<Gender> options = FXCollections.observableArrayList(
-            Gender.MAN,
-            Gender.WOMAN
+            Gender.male,
+            Gender.female
     );
 
     public PersonPanelFX() {
