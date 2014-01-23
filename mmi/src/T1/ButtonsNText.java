@@ -57,6 +57,7 @@ public class ButtonsNText extends Application {
         EventHandler eh = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                int pos = inputField.getCaretPosition();
                 if (event.getSource() instanceof ToggleButton) {
                     ToggleButton btn = (ToggleButton) event.getSource();
                     System.out.println(btn.getText());
@@ -84,7 +85,7 @@ public class ButtonsNText extends Application {
         btnUpper.setOnAction(eh);
         btnLower.setOnAction(eh);
         inputField.setOnAction(eh);
-        inputField.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+        inputField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (cont.isSelected()) {

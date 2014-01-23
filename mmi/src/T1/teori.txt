@@ -1,0 +1,9 @@
+In GUI programming, we distinguish between lexical, syntactical and semantical events. What kind of mechanisms did you use to handle lexical and syntactical events in your implementation?
+I inputField event handleren blir det brukt en leksikalsk hendelse.
+Eventhandleren blir bruk buttongroup.
+
+What is the advantage of syntactical events compared to lexical events?
+En syntaktisk hendelse er det samme som en serie med leksikale hendelser. Ettersom det da kan gjøres mer ting med mindre kode vil dette være en fordel.
+Concerning the lexical events you answered for the first question above, could you have handled syntactical event instead of lexical events?
+Ja, sannsynligvis, men det ville nok vært mer innviklet og unødvendig ettersom vi bare trenger keyevents.
+

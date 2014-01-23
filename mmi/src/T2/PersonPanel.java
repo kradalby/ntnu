@@ -125,7 +125,9 @@ public class PersonPanel extends JPanel{
 
         @Override
         public void stateChanged(ChangeEvent e) {
-            model.setHeight(HeightPropertyComponent.getValue());
+            if(model!=null){
+                model.setHeight(HeightPropertyComponent.getValue());
+            }
         }
     }
 
@@ -134,10 +136,12 @@ public class PersonPanel extends JPanel{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            model.setName(NamePropertyComponent.getText());
-            model.setDateOfBirth(DateOfBirthPropertyComponent.getText());
-            model.setEmail(EmailPropertyComponent.getText());
-            model.setGender((Gender) GenderPropertyComponent.getSelectedItem());
+            if(model!=null){
+                model.setName(NamePropertyComponent.getText());
+                model.setDateOfBirth(DateOfBirthPropertyComponent.getText());
+                model.setEmail(EmailPropertyComponent.getText());
+                model.setGender((Gender) GenderPropertyComponent.getSelectedItem());
+            }
         }
     }
 
