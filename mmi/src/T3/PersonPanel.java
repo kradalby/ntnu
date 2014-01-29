@@ -101,16 +101,27 @@ public class PersonPanel extends JPanel implements PropertyChangeListener{
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        //if (evt.getPropertyName() == "name") {
+        //    model.setName(nameField.getText());
+        //} else if (evt.getPropertyName() == "dateOfBirth") {
+        //    model.setDateOfBirth(dateOfBirthField.getText());
+        //} else if (evt.getPropertyName() == "email") {
+        //    model.setEmail(emailField.getText());
+        //} else if (evt.getPropertyName() == "gender") {
+        //    model.setGender((Gender) genderField.getSelectedItem());
+        //} else if (evt.getPropertyName() == "height") {
+        //    model.setHeight(heightField.getValue());
+        //}
         if (evt.getPropertyName() == "name") {
-            model.setName(nameField.getText());
+            nameField.setText(model.getName());
         } else if (evt.getPropertyName() == "dateOfBirth") {
-            model.setDateOfBirth(dateOfBirthField.getText());
+            dateOfBirthField.setText(model.getDateOfBirth());
         } else if (evt.getPropertyName() == "email") {
-            model.setEmail(emailField.getText());
+            emailField.setText(model.getEmail());
         } else if (evt.getPropertyName() == "gender") {
-            model.setGender((Gender) genderField.getSelectedItem());
+            genderField.setSelectedItem(model.getGender());
         } else if (evt.getPropertyName() == "height") {
-            model.setHeight(heightField.getValue());
+            heightField.setValue(model.getHeight());
         }
     }
 

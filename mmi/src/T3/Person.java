@@ -22,7 +22,7 @@ public class Person {
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-        pcs.addPropertyChangeListener(listener);
+        this.pcs.addPropertyChangeListener(listener);
     }
 
 
