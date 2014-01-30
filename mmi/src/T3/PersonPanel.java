@@ -6,26 +6,22 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * Created by kradalby on 21/01/14.
  */
-public class PersonPanel extends JPanel{
+public class PersonPanel extends JPanel implements PropertyChangeListener{
 
 
-    private Person model;
+    protected Person model;
 
-    private JLabel nameLabel;
-    private JLabel emailLabel;
-    private JLabel birthdayLabel;
-    private JLabel genderLabel;
-    private JLabel heightLabel;
+    protected JLabel nameLabel, emailLabel, birthdayLabel, genderLabel, heightLabel;
 
-    private JTextField nameField;
-    private JTextField emailField;
-    private JTextField dateOfBirthField;
-    private JComboBox<Gender> genderField;
-    private JSlider heightField;
+    protected JTextField nameField, emailField, dateOfBirthField;
+    protected JComboBox<Gender> genderField;
+    protected JSlider heightField;
 
     private final Dimension sliderDimension = new Dimension(320, 40);
     private static final int HEIGHTMIN = 120;
@@ -42,8 +38,6 @@ public class PersonPanel extends JPanel{
 
     public void initGUI() {
 
-        TextFieldChanged tfcl = new TextFieldChanged();
-
         nameLabel = new JLabel("Name:");
         emailLabel = new JLabel("Email:");
         birthdayLabel = new JLabel("Birthday:");
@@ -51,18 +45,18 @@ public class PersonPanel extends JPanel{
         heightLabel = new JLabel("Height:");
 
         nameField = new JTextField();
-        nameField.addActionListener(tfcl);
+        nameField.addActionListener(new NameFieldChanged());
 
         emailField = new JTextField();
-        emailField.addActionListener(tfcl);
+        emailField.addActionListener(new EmailFieldChanged());
 
         dateOfBirthField = new JTextField();
-        dateOfBirthField.addActionListener(tfcl);
+        dateOfBirthField.addActionListener(new DateFieldChanged());
 
         genderField = new JComboBox<Gender>();
         genderField.addItem(Gender.male);
         genderField.addItem(Gender.female);
-        genderField.addActionListener(tfcl);
+        genderField.addActionListener(new GenderFieldChanged());
 
         heightField = new JSlider(JSlider.HORIZONTAL, HEIGHTMIN, HEIGHTMAX, HEIGHTINIT);
         heightField.setMajorTickSpacing(10);
@@ -105,17 +99,21 @@ public class PersonPanel extends JPanel{
 
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        JPanel panel = new PersonPanel();
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
 
-        frame.add(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setSize(400, 200);
+        if (evt.getPropertyName() == "name") {
+            nameField.setText(model.getName());
+        } else if (evt.getPropertyName() == "dateOfBirth") {
+            dateOfBirthField.setText(model.getDateOfBirth());
+        } else if (evt.getPropertyName() == "email") {
+            emailField.setText(model.getEmail());
+        } else if (evt.getPropertyName() == "gender") {
+            genderField.setSelectedItem(model.getGender());
+        } else if (evt.getPropertyName() == "height") {
+            heightField.setValue(model.getHeight());
+        }
     }
-
-
 
 
     private class SliderChangeListener implements ChangeListener {
@@ -129,14 +127,41 @@ public class PersonPanel extends JPanel{
     }
 
 
-    private class TextFieldChanged implements ActionListener {
+    private class NameFieldChanged implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             if(model!=null){
                 model.setName(nameField.getText());
+            }
+        }
+    }
+
+    private class DateFieldChanged implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(model!=null){
                 model.setDateOfBirth(dateOfBirthField.getText());
+            }
+        }
+    }
+
+    private class EmailFieldChanged implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(model!=null){
                 model.setEmail(emailField.getText());
+            }
+        }
+    }
+
+    private class GenderFieldChanged implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(model!=null){
                 model.setGender((Gender) genderField.getSelectedItem());
             }
         }
@@ -145,6 +170,7 @@ public class PersonPanel extends JPanel{
 
     public void setModel(Person model) {
         this.model = model;
+        model.addPropertyChangeListener(this);
         nameField.setText(this.model.getName());
         emailField.setText(this.model.getEmail());
         dateOfBirthField.setText(this.model.getDateOfBirth());
@@ -156,6 +182,40 @@ public class PersonPanel extends JPanel{
     public Person getModel() {
         return this.model;
     }
+
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        JPanel c = new JPanel();
+        c.setLayout(new BoxLayout(c, BoxLayout.Y_AXIS));
+
+        PersonPanel panel = new PersonPanel();
+        PassivPersonPanel panel2 = new PassivPersonPanel();
+
+
+
+
+        Person person = new Person("Kristoffer Dalby");
+        person.setDateOfBirth("10.08.92");
+        person.setGender(Gender.male);
+        person.setEmail("kradalby@kradalby.no");
+        person.setHeight(150);
+
+        panel.setModel(person);
+        panel2.setModel(person);
+
+        c.add(panel);
+        c.add(panel2);
+
+        frame.setContentPane(c);
+        frame.setVisible(true);
+        frame.setSize(400, 600);
+    }
+
+
 
 
 }
