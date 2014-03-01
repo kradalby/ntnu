@@ -59,7 +59,7 @@
 <attributes/>
 </diamond>
 <circle id="11" name="D" x="171" y="122"/>
-<circle id="21" name="D" x="484" y="358"/>
+<circle id="21" name="D" x="483" y="375"/>
 <line cardinality_string="(0,n)" has_u="false" id="5" is_weak="false" role="" style="0" turned="false">
 <connection connection_side="0" direction="0" object_id="0" relation_point_x="43" relation_point_y="57"/>
 <connection connection_side="1" direction="1" object_id="4" relation_point_x="21" relation_point_y="121"/>
@@ -90,15 +90,15 @@
 </line>
 <line cardinality_string="" has_u="true" id="22" is_weak="false" role="" style="1" turned="false">
 <connection connection_side="1" direction="1" object_id="19" relation_point_x="375" relation_point_y="427"/>
-<connection connection_side="0" direction="0" object_id="21" relation_point_x="484" relation_point_y="373"/>
+<connection connection_side="0" direction="0" object_id="21" relation_point_x="483" relation_point_y="390"/>
 </line>
 <line cardinality_string="" has_u="true" id="23" is_weak="false" role="" style="1" turned="false">
 <connection connection_side="1" direction="1" object_id="20" relation_point_x="646" relation_point_y="425"/>
-<connection connection_side="2" direction="0" object_id="21" relation_point_x="514" relation_point_y="373"/>
+<connection connection_side="2" direction="0" object_id="21" relation_point_x="513" relation_point_y="390"/>
 </line>
-<line cardinality_string="" has_u="false" id="24" is_weak="false" role="" style="1" turned="false">
+<line cardinality_string="" has_u="false" id="24" is_weak="true" role="" style="1" turned="false">
 <connection connection_side="3" direction="1" object_id="18" relation_point_x="498" relation_point_y="349"/>
-<connection connection_side="1" direction="1" object_id="21" relation_point_x="499" relation_point_y="358"/>
+<connection connection_side="1" direction="1" object_id="21" relation_point_x="498" relation_point_y="375"/>
 </line>
 <line cardinality_string="(1,1)" has_u="false" id="26" is_weak="false" role="" style="0" turned="false">
 <connection connection_side="2" direction="0" object_id="1" relation_point_x="541" relation_point_y="61"/>

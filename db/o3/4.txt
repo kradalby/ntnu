@@ -1,0 +1,28 @@
+b)
+
+CREATE VIEW DEPTSUMMARY(PNAME, DEPTNUM, TOTEMP, TOTHOURS) 
+AS SELECT p.pname, p.dnum, count(*), sum(w.hours)
+    FROM project p, works_on w 
+    WHERE p.pnumber = w.pno 
+    GROUP BY p.pnumber
+
+
+
+c)
+
+1:
+Lovlig
+SELECT DNO, COUNT(*), SUM(SALARY), AVG(SALARY) FROM EMPLOYEE
+GROUP BY DNO;
+
+2:
+Lovlig
+SELECT DNO, COUNT(*), SUM(SALARY) as "sumlonn" FROM EMPLOYEE
+GROUP BY DNO
+HAVING sumlonn > 10000;
+
+3 og 4:
+Ulovlig, man kan ikke slette eller oppdatere views.
+
+
+

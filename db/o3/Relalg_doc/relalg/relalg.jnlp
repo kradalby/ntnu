@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<jnlp codebase="http://www.idi.ntnu.no/~heggland/relalg/" href="relalg.jnlp">
+  <information>
+    <title>RelasJonsalgebra</title>
+    <vendor>Jon Heggland</vendor>
+    <homepage href="http://www.idi.ntnu.no/~heggland/relalg/"/>
+    <description>RelasJonsalgebra</description>
+    <description kind="short">Graphical relational algebra for Oracle</description>
+    <icon href="RelAlg32.gif" width="32" height="32"/>
+    <icon href="RelAlg64.gif" width="64" height="64"/>
+    <offline-allowed/>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.5+"/>
+    <jar href="relalg-2.0b.jar"/>
+    <jar href="../ontolog/jws/ojdbc14-signed.jar"/>
+  </resources>
+  <application-desc main-class="heggland.relalg.RelAlg"/>
+</jnlp>

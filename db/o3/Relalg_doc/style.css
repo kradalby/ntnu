@@ -1,0 +1,73 @@
+body
+{ 
+        background-color: white; 
+        color: black; 
+        font-family: Verdana, sans-serif;
+        line-height: 120%;
+}
+
+table
+{
+        line-height: 120%;
+}
+
+table.contents
+{
+  width: 50em;
+}
+
+.backwards { direction: rtl; unicode-bidi: bidi-override }
+
+.toc,
+.caption
+{
+  font-size: smaller;
+}
+
+h1
+{
+	margin-bottom: 2ex
+}
+
+p
+{
+	margin-top: 0;
+	margin-bottom: 2ex;
+	margin-left: 2ex
+}
+
+ul
+{
+				margin-top: 0;
+}
+
+li
+{
+        line-height: 120%;
+}
+
+td.left 
+{ 
+	font-weight: bold; 
+	text-align: right; 
+	border-right: solid black 1pt;
+	padding-right: 2ex
+}
+
+td.left2 
+{ 
+	font-weight: regular; 
+	text-align: right; 
+	border-right: solid black 1pt;
+	padding-right: 2ex
+}
+
+a:link
+{
+	color: #0000CC
+}
+
+a:visited
+{
+	color: #660099
+}

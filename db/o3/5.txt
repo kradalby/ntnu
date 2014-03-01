@@ -1,0 +1,30 @@
+a)
+
+SELECT sno , sname , status , city FROM Supplier HAVING status > 15;
+
+b)
+
+SELECT s.sname , s.city FROM Supplier s JOIN SuppliesPart sp ON s.sno = sp.sno JOIN Part p ON sp.pno = p.pno WHERE p.pname = ’Screw’;
+
+c)
+
+SELECT p.pno, p.pname FROM Part p, SuppliesPart sp WHERE sp.pno = p.pno GROUP BY pname HAVING COUNT (*) >1;
+
+d)
+
+SELECT count(*) AS "AntLev" FROM Supplier;
+
+e)
+
+SELECT DISTINCT FROM Supplier s
+JOIN SuppliesPart sp ON s.sno = sp.sno JOIN Part p ON p.pno = sp.pno
+WHERE p.weight > 10.0;
+
+f)
+
+SELECT s.sname
+s.city
+FROM Supplier s WHERE s.sno NOT IN( SELECT sp.sno
+FROM SuppliesPart sp, Part p WHERE p.pno = sp.pno
+AND p.pname = ’Screw’)
+ORDER BY s.sname ASC;

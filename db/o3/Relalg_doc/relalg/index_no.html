@@ -1,0 +1,531 @@
+<html>
+  <head>
+    <title>RelasJonsalgebra</title>
+    <link rel="stylesheet" href="../style.css" type="text/css">
+  </head>
+    <table class="contents" cellpadding="0" cellspacing="0">
+      <tr>
+        <td><h1>RelasJonsalgebra</h1></td>
+        <td width="29" align="right" valign="top">
+          <a target="_top" title="Engelsk versjon / English version" href=".">
+          <img src="../uk.png" width="29" height="15" border="0" alt="English"/>
+          </a>
+        </td>
+      </tr>
+    </table>
+
+    <table class="contents" cellspacing="0">
+      <tr>
+        <td class="left" valign="top">
+          <a href="relalg.jnlp"><img src="RelAlg32.gif" title="Start RelasJonsalgebra!" border="0"></a>&nbsp;
+        </td>
+        <td>
+          <p>
+            <a class="important" href="relalg.jnlp">Start RelasJonsalgebra!</a>
+          </p>
+          <p>
+            RelasJonsalgebra krever <a target="_top" href="http://www.java.com/">Java 2</a> (med Java Web Start).
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top">Innhold</td>
+        <td width="100%">
+          <ul class="toc">
+            <li><a href="#introduksjon">Introduksjon</a></li>
+            <li><a href="#database">Databasetilkobling</a></li>
+            <li><a href="#toolbar">Verktøylinja</a></li>
+            <li><a href="#noder">Noder</a></li>
+              <ul>
+                <li><a href="#relvar">Relasjonsvariabel</a></li>
+                <li><a href="#seleksjon">Seleksjon</a></li>
+                <li><a href="#projeksjon">Projeksjon</a></li>
+                <li><a href="#omdøping">Omdøping</a></li>
+                <li>
+                  <a href="#aggregeringgruppering">
+                    Aggregering og gruppering
+                  </a>
+                </li>
+                <li><a href="#utvidelse">Utvidelse</a></li>
+                <li><a href="#join">Join</a></li>
+                <li><a href="#semijoin">Semijoin</a></li>
+                <li><a href="#antijoin">Antijoin</a></li>
+                <li><a href="#indreunion">Indre union</a></li>
+                <li><a href="#unionsnitt">Union og snitt</a></li>
+                <li><a href="#differens">Differens</a></li>
+                <li><a href="#produkt">Kartesisk produkt</a></li>
+                <li><a href="#thetajoin">Thetajoin</a></li>
+              </ul>
+            <li><a href="#sistenytt">Siste nytt</a></li>
+            <li><a href="#evaluering">Evaluering</a></li>
+            <li><a href="#referanser">Referanser</a></li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top"><a name=introduksjon>Introduksjon</a></td>
+        <td>
+          <p>
+            RelasJonsalgebra er, som navnet antyder, et program for å lage og
+            utføre relasjonsalgebra, i form av trestrukturer med
+            relasjonsalgebraoperatorer som noder. Hvis du lurer på hvorfor det
+            er en stor J i navnet så er det fordi <a target="_top" title=
+            "Forfatterens hjemmeside" href="http://www.idi.ntnu.no/~heggland/">
+            jeg</a> (som har laget det) heter Jon :).
+          </p>
+          <p>
+            Nuvel. Jeg er selvsagt hellig overbevist om at programmet er så
+            brukervennlig at det er bortkastet tid å lage en skikkelig
+            brukerveiledning (det tar sikkert mer tid å lese gjennom dette enn
+            det tar å prøve seg frem i programmet), så her følger kun en kjapp
+            gjennomgang av funksjonaliteten. Jeg kommer heller ikke til å
+            forklare grunnleggende relasjonsalgebrateori, siden det er forklart andre steder.
+          </p>
+          <p>
+            Send meg gjerne kommentarer om feil og mangler, eller kommentarer eller forslag til brukergrensesnittet eller funksjonaliteten. Epostadressen min er <span class="backwards">dnalggeh.noj</span>@ntnu.no; eventuelt kan du bruke <a href="#evaluering">evalueringsskjemaet</a> nederst på siden.
+          </p>
+          <p>
+            Merk at jeg bruker SQL for implementasjon av algebraen. SQL er et
+            dårlig designet språk, med lite ortogonalitet, mange inkonsekvenser
+            og enkelte faktiske feil, spesielt i tilfeller der NULLer og
+            treverdilogikk er involvert. Algebraen vil derfor ikke alltid gi de
+            resultatene du kanskje forventer, men jeg har liten mulighet til å
+            fikse det hvis programmet mitt skal funke mot SQL-databaser.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top"><a name="database">Databasetilkobling</a></td>
+        <td>
+          <p>
+            Du kan koble deg til en database ved å velge "Kople til" fra Database-menyen. Da blir du møtt av innloggingsvinduet i figuren under. Her skriver du inn brukernavnet og passordet til databasen din, og trykker "Logg inn". De andre feltene kan du egentlig bare glemme, spesielt hvis du ikke vet hva de betyr.
+            <center>
+              <table>
+                <tr><td><img width="347" height="161" src="innlogging-2.0.png"></td>
+                </tr>
+                <tr><th class="caption">Innloggingsvinduet</th></tr>
+              </table>
+            </center>
+          </p>
+          <p>
+            RelasJonsalgebra bruker bare databasen for å hente data; den vil aldri skrive data eller endre tabelldefinisjoner.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top"><a name=toolbar>Verktøylinja</a></td>
+        <td>
+          <p>
+            Øverst i hovedvinduet er en verktøylinje, vist i figuren nedenfor.
+            <center>
+              <table>
+                <tr><td>
+                  <img width="560" height="30" src="verktoylinje-2.0.png">
+                </td></tr>
+                <tr><th class="caption">Verktøylinja</th></tr>
+              </table>
+            </center>
+          </p>
+          <p>
+            De to første knappene er bare aktive hvis du er koblet til en database. Den første er for å utføre algebrauttrykket du har laget, såfremt det er utførbart. Resten er for å lage relasjonsalgebranoder (relvarer/relasjoner og relasjonsoperatorer). De funker ganske likt alle sammen &#150; du klikker på en av dem og klikker deretter på tegneområdet for å lage en node.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top"><a name="noder">Noder</a></td>
+        <td>
+          <p>
+            Du bygger opp relasjonsalgebratrær/-uttrykk ved å lage noder og koble dem sammen, men for å få noe fornuftig ut av dem, må en del noder konfigureres &#150; du må spesifisere hvilke attributter en projeksjon skal projisere, hva slags kriterier en seleksjon skal selektere i henhold til osv. Det gjøres ved å høyreklikke på noden og velge <code>Konfigurér</code>. Enkelte noder stiller krav til typene (dvs. mengden av attributter) til relasjonsverdiene som de skal behandle.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top"><a name="relvar">Relasjonsvariabel</a></td>
+        <td>
+          <p>
+            Relvar-noder kan lages på to måter: Ved å velge en relvar fra databasen du eventuelt er koblet opp mot (med R-knappen til venstre), eller ved å lage en node som du konfigurerer med navn og attributter (med R-knappen til høyre). Begge typene kan konfigureres når de først er laget; figuren under viser et eksempel.
+            <center>
+              <table>
+                <tr><td><img width="564" height="372" src="relvar-2.0.png"></td>
+                </tr>
+                <tr><th class="caption">Relvarkonfigurering</th></tr>
+              </table>
+            </center>
+          </p>
+          <p>
+            Navnet kan endres, og attributter fjernes eller legges til. Merk at å endre en relvar du hentet fra databasen, ikke endrer databasen &#150; tabeller blir ikke døpt om, og kolonner ikke lagt til eller slettet. Imidlertid vil ikke en databaserelvar hvis attributter du har endret, kunne utføres lenger i dette programmet. Hvis relvarnoden du konfigurerer har samme navn som en tabell i databasen (uavhengig av hvordan du lagde noden i utgangspunktet), kan du få den til å ha samme attributtmengde som databasetabellen ved å trykke på oppfriskingsknappen over attributtlista.
+          </p>
+          <p>
+            Relvarnoder kan være i en av tre tilstander. Hvis relvaren finnes i databasen (dvs. har samme navn og samme attributtmengde), vil navnet dens skrives med fet skrift, og den vil være utførbar. Hvis den har samme navn som en tabell i databasen, men forskjellig attributtmengde, vil navnet skrives med kursiv, og noden vil ikke være utførbar. Hvis den ikke finnes i databasen (eller du ikke er koblet til noen database), vil navnet skrives med vanlig skrift, og noden vil selvsagt ikke være utførbar.
+            <center>
+              <table>
+                <tr><td><img width="211" height="90" src="relvartilstand-2.0.png"></td>
+                </tr>
+                <tr><th class="caption">Relvartilstander</th></tr>
+              </table>
+            </center>
+          </p>
+          <p>
+            Hvis du gjør endringer i databasen mens RelasJonsalgebra er oppkoblet, kan du få RelasJonsalgebra til å oppdage endringene ved å velge "Frisk opp" på Database-menyen. (Du kan også koble fra for så å koble til igjen.) Dette kan føre til at relvarnoder skifter tilstand &#150; attributtmengdene til relvarnodene blir ikke oppfrisket før du eventuelt ber om det eksplisitt for hver enkelt.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top"><a name="seleksjon">Seleksjon</a></td>
+        <td>
+          <p>
+            Seleksjonsnoder må konfigureres: Du må angi hvilken betingelse den skal selektere på. Figuren under viser et eksempel på konfigurering av en seleksjonsnode.
+            <center>
+              <table>
+                <tr><td><img width="564" height="372" src="seleksjon-2.0.png"></td>
+                </tr>
+                <tr><th class="caption">Seleksjonskonfigurering</th></tr>
+              </table>
+            </center>
+          </p>
+          <p>
+            Lista til høyre viser hvilke attributter som er tilgjengelige å selektere på. Ved å klikke på dem kan du kopiere dem over i tekstfeltet til venstre. Tekstfeltet må inneholde gyldig SQL-kode &#150; husk enkeltfnutter rundt stringer, og <emph>ikke</emph> avslutt med semikolon. Det går selvsagt an å skrive inn attributtnavn i stedet for å bruke lista.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top"><a name="projeksjon">Projeksjon</a></td>
+        <td>
+          <p>
+            For projeksjonsnoder må du angi hvilke attributter du vil projisere. Kryss av i lista. For at noden skal være utførbar, må du krysse av minst ett attributt; SQL støtter dessverre ikke relasjoner uten attributter. :(
+            <center>
+              <table>
+                <tr><td><img width="564" height="372" src="projeksjon-2.0.png"></td>
+                </tr>
+                <tr><th class="caption">Projeksjonskonfigurering</th></tr>
+              </table>
+            </center>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top"><a name="omdøping">Omdøping</a></td>
+        <td>
+          <p>
+            Skriv inn nye navn for attributtene du vil døpe om. De du ikke skriver noe for, beholder navnet sitt. Pass på at alle attributtnavnene til syvende og sist er unike.
+            <center>
+              <table>
+                <tr><td><img width="564" height="372" src="omdoping-2.0.png"></td>
+                </tr>
+                <tr><th class="caption">Omdøpingskonfigurering</th></tr>
+              </table>
+            </center>
+          </p>
+          <p>
+            Merk at omdøping også kan gjøres ved å kombinere <a href="#utvidelse">utvidelse</a> og <a href="#projeksjon">projeksjon</a>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top">
+          <a name="aggregeringgruppering">Aggregering og gruppering</a>
+        </td>
+        <td>
+          <p>
+            Med denne kan du spesifisere grupperingsattributter og aggregeringsfunksjoner. Pass på at alle attributtnavn til syvende og sist er unike.
+            <center>
+              <table>
+                <tr><td><img width="564" height="372" src=
+                "aggregeringgruppering-2.0.png"></td></tr>
+                <tr><th class="caption">Konfigurering av aggregering og gruppering</th></tr>
+              </table>
+            </center>
+          </p>
+          <p>
+            Jeg bruker Oracle/SQLs aggregeringsfunksjoner, så resultatet blir ikke alltid riktig. :( For eksempel blir summen av et attributt i en tom relasjon NULL, ikke 0. Tilsvarende er det med MAX og MIN.
+          </p>
+          <p>
+            Merk at gruppering uten aggregering er ekvivalent med <a href="#projeksjon">projeksjon</a>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top"><a name="utvidelse">Utvidelse</a></td>
+        <td>
+          <p>
+            Med denne noden kan du legge til nye attributter til en relasjon, basert på andre attributter, konstanter og/eller funksjoner. Den er basert på Dates EXTEND-operator <a href="#date">[Date]</a> (men er ikke så kraftig), og gir samme funksjonalitet som Garcia-Molinas noe suspekte &laquo;extended projection&raquo; <a href="#garcia-molina">[Garcia-Molina m.fl.]</a>. Fyll inn uttrykket du vil bruke som attributtverdi, samt et unikt attributtnavn.
+            <center>
+              <table>
+                <tr><td><img width="564" height="372" src="utvidelse-2.0.png"></td>
+                </tr>
+                <tr><th class="caption">Konfigurering av utvidelse</th></tr>
+              </table>
+            </center>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top">
+          <a name="join">Join</a>
+        </td>
+        <td>
+          <p>
+            Denne noden har ikke noe å konfigurere. Join er assosiativ og kommutativ, så denne noden kan ta så mange inn-relasjonsverdier du vil (selv én), og rekkefølgen spiller ingen rolle.
+          </p>
+          <p>
+            Merk at hvis to relasjonsverdier har samme type, degenererer join til <a href="#unionogsnitt">snitt</a>, og hvis typene deres ikke overlapper (dvs. de har ingen felles attributter) blir det et <a href="#produkt">kartesisk produkt</a>. Vi trenger altså ikke de to operatorene når vi har join.
+          </p>
+          <blockquote>
+            <em>Merk:</em> Dette er dog dessverre ikke alltid er gyldig i SQL, hvor man har mangelfull treverdilogikk og &laquo;relasjoner&raquo; med NULLer. I SQLs idio(synkra)tiske verden regnes en NULL av og til som lik andre NULLer, og av og til ikke, og det er ikke lett å vite når. For NATURAL JOIN regnes de ikke som like, mens for INTERSECT så gjør de det. Så hvis relasjonene dine inneholder NULLer, vil ikke snitt og join av relasjoner av samme type nødvendigvis gi samme resultat. Moral: Unngå NULLer så godt du kan.
+          </blockquote>
+          <p>
+            Joinet av ingen relasjoner er TABLE_DEE (relasjonen uten attributter og med ett tuppel <a href="#date">[Date]</a>), men jeg har ikke implementert det &#150; SQL støtter ikke relasjoner uten attributter, og det er uansett er det en grei regel at alle løvnodene i algebratreet må være relasjonsvariabler.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top">
+          <a name="semijoin">Semijoin</a>
+        </td>
+        <td>
+          <p>
+            Denne noden har ikke noe å konfigurere, og tar to inn-relasjonsverdier hvor rekkefølgen (venstre-høyre) har betydning. Semijoin kan defineres som join etterfulgt av en projeksjon over attributtene til det første (venstre) argumentet &#150; eventuelt en projeksjon av høyre-relasjonen over felles attributter, etterfulgt av et join med venstre-relasjonen. Jeg pleier å tenke &laquo;gi meg alle tuplene i den ene relasjonen som har et tilsvarende tuppel i den andre relasjonen&raquo;. Den kalles gjerne &laquo;having&raquo; eller &laquo;matching&raquo; i databasespråk som støtter den.
+          </p>
+          <p>
+            I likhet med <a href="#join">join</a> degenererer semijoin til <a href="#unionsnitt">snitt</a> hvis inn-relasjonene er av samme type. Hvis typene ikke overlapper, blir resultatet enten tomt (hvis høyre-relasjonen er tom) eller lik venstre-relasjonen (hvis høyre-relasjonen har minst ett tuppel) &#150; m.a.o. et join med enten TABLE_DUM eller TABLE_DEE. Hvis man bare har én inn-relasjon, har jeg definert at resultatet blir lik argumentet, siden det er det som skjer hvis man implementerer semijoin ved hjelp av join før projeksjon.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top">
+          <a name="antijoin">Antijoin</a>
+        </td>
+        <td>
+          <p>
+            Denne noden er komplementet til <a href="#semijoin">semijoin</a>, og fungerer likt, bare motsatt &#150; &laquo;gi meg alle tuplene i den ene relasjonen som <em>ikke</em> har et tilsvarende tuppel i den andre relasjonen&raquo;. Den kalles gjerne &laquo;without&raquo; eller &laquo;not_matching&raquo; i databasespråk som støtter den.
+          </p>
+          <p>
+            Antijoin degenererer til <a href="#differens">differens/minus</a> hvis inn-relasjonene er av samme type; derfor kalles den også for semiminus. Hvis typene ikke overlapper, blir resultatet enten tomt (hvis høyre-relasjonen har minst ett tuppel) eller lik venstre-relasjonen (hvis høyre-relasjonen er tom). Hvis man bare har én inn-relasjon, har jeg definert at resultatet blir tomt, siden antijoin er komplementet til <a href="#semijoin">semijoin</a>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top">
+          <a name="indreunion">Indre union</a>
+        </td>
+        <td>
+          <p>
+            Denne operatoren er uvanlig, men ganske fiks, og den passer fint sammen med de tre foregående. Den kan defineres som unionen av projeksjonene av inn-relasjonene over de attributtene de har felles. Den er assosiativ og kommutativ, og har ikke noe å konfigurere.
+          </p>
+          <p>
+            Indre union degenererer til <a href="#unionsnitt">union</a> hvis inn-relasjonene er av samme type. Hvis typene ikke overlapper, skal man egentlig få TABLE_DEE (relasjonen uten attributter og med ett tuppel) eller TABLE_DUM (relasjonen uten attributter og uten tupler <a href="#date">[Date]</a>) som resultat, avhengig av om det finnes minst et tuppel i minst en av inn-relasjonene, men SQL støtter som sagt ikke relasjoner uten attributter, så et slikt uttrykk er ikke utførbart i RelasJonsalgebra.
+          </p>
+          <p>
+            Merk den fikse dualiteten mellom join og indre union: typen til resultatet av join har unionen av attributtene til inn-relasjonene; indre union har snittet. Join degenererer til snitt når indre union degenererer til union. For mer om dette, prøv f.eks. med et <a href="http://www.google.no/search?q=%22relational+lattice%22">Google-søk på "relational lattice"</a>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top">
+          <a name="unionsnitt">Union og snitt</a>
+        </td>
+        <td>
+          <p>
+            Disse er assosiative og kommutative, så de kan ta et vilkårlig antall inn-relasjonsverdier (selv én) i vilkårlig rekkefølge. Det kreves imidlertid at alle er av samme type, dvs. har de samme attributtene. Og da gjør henholdsvis <a href="#join">join</a> og <a href="#indreunion">indre union</a> samme jobben, så man trenger egentlig ikke disse to.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top"><a name="differens">Differens</a></td>
+        <td>
+          <p>
+            Differens kan bare ta to inn-relasjonsverdier, og rekkefølgen har betydning. Jeg bruker vanlig venstre-høyre-regel. Begge inn-verdiene må være av samme type. Du kan like gjerne bruke <a href="#antijoin">antijoin</a>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top">
+          <a name="produkt">Kartesisk produkt</a>
+        </td>
+        <td>
+          <p>
+            Denne er assosiativ og kommutativ (i motsetning til den alminnelige
+            mengdeproduktdefinisjonen, fascinerende nok), men den krever at alle
+            relasjonstypene er disjunkte, dvs. ingen attributter med samme navn &#150; og da gjør <a href="#join">join</a> samme jobben.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left2" valign="top"><a name="thetajoin">Thetajoin</a></td>
+        <td>
+          <p>
+            Thetajoin er også assosiativ og kommutativ, men typene til inn-relasjonene må være disjunkte (dvs. ingen felles attributter). Bruk omdøpingsnoden, om nødvendig. Noden konfigureres på samme måte som <a href="#seleksjon">seleksjonsnoden</a>. Den er ekvivalent med et <a href="#produkt">kartesisk produkt</a> (eller et <a href="#join">join</a>) etterfulgt av en <a href="#seleksjon">seleksjon</a>, så i likhet med <a href="#unionsnitt">mengdeoperasjonene</a> er den med mest for syns skyld.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top"><a name="sistenytt">Siste nytt</a></td>
+        <td>
+          <p><strong>05.07.2007</strong></p>
+          <ul>
+            <li>
+              Laget filbehandling: Man kan nå lagre og åpne algebraprosjekter til/fra fil. Jeg bruker <a href="http://www.json.org/">JSON</a> til filformatet.
+            </li>
+            <li>
+              Gjort det mulig å bruke programmet uten å være tilkoblet en database.
+            </li>
+            <li>Laget semijoin, antijoin og indre union.</li>
+            <li>Oversatt programmet til nynorsk.</li>
+            <li>Laget meny og ryddet opp på verktøylinja.</li>
+            <li>Gjort thetajoin n-adisk.</li>
+          </ul>
+          <p><strong>28.05.2005</strong></p>
+          <ul>
+            <li>Fikset noen småfeil</li>
+          </ul>
+          <p><strong>21.09.2004</strong></p>
+          <ul>
+            <li>
+              Gjort om på SQL-genereringa: Bruker nå NATURAL JOIN, JOIN og CROSS JOIN-konstruksjoner for joining og mere nøsting i stedet for flere relvarer i WHERE-delen og betingelser. Det fjernet i hvert fall én bøgg (før kunne du utføre seleksjoner på attributter som var projisert bort), gir en enklere implementasjon, og SQL-kode som likner mer på algebrauttrykket.
+            </li>
+            <li>
+              Laget omdøpings- og utvidelsesnoder.
+            </li>
+            <li>
+              Endret naturlig join-noden: Den er ikke konfigurerbar lenger, men baserer seg på like attributtnavn, som korrekt er. Den er dermed nå blitt kommutativ, og kan ta mer enn to inn-relasjonsverdier. Det kan forresten union, snitt og kartesisk produkt også.
+            </li>
+            <li>
+              Kuttet ut relvar-alias: Omdøpingsnode, en mer korrekt implementasjon av naturlig join og mer algebrabasert SQL-generering gjør det unødvendig. Dermed forsvinner konfigurering av relvar-noder og mengdeoperasjoner, og en masse komplisert kode.
+            </li>
+            <li>
+              Passer på at attributtnavn er unike, i henhold til korrekt relasjonsteori. Det betyr bl.a. at kartesisk produkt og
+              thetajoin bare funker på relasjoner uten felles attributter.
+            </li>
+            <li>
+              Union, snitt og differens krever nå at operandene har de samme attributtene, og baserer seg på attributtnavn, ikke rekkefølge, i motsetning til SQL. I tillegg til at det er korrekt i henhold til relasjonsteori, gjør det også at union og snitt er kommutative nå, i motsetning til før.
+            </li>
+            <li>
+              Forandret symbolet til aggregering/gruppering-noden fra snirklete F til gamma. Konfigureringen gir nå mulighet for å bestemme navnet på de nye attributtene selv, og COUNT(attributt) har blitt fjernet fordi den ikke gjorde noe nytte for seg.
+            </li>
+          </ul>
+          <p><strong>27.08.2004</strong></p>
+          <ul>
+            <li>
+              Laget mulighet for å friske opp relasjonsvariablene (m.a.o. lese inn tabelldefinisjonene på nytt) uten at hele diagrammet slettes.
+            </li>
+            <li>
+              Lager flere undermenyer i relasjonsvariabelknappemenyen hvis det er veldig mange relvarer, slik at alle forhåpentligvis får plass på skjermen.
+            </li>
+            <li>
+              Fjernet sorteringsnoden. Relasjoner er per definisjon uordnede.
+            </li>
+            <li>
+              La inn mulighet for å sortere tabellen i resultatvinduet i stedet.
+            </li>
+          </ul>
+          <p><strong>En eller annen gang jeg ikke husker helt</strong></p>
+          <ul>
+            <li>
+              Kuttet ut mulighetene for å skru av og på autoalias og antialias.
+            </li>
+            <li>
+              Skriver ut SQL-koden i resultatvinduet. Merk: Denne koden er ikke nødvendigvis den mest elegante, men den er så korrekt som det går an (i og med at SQL ikke er relasjonsbasert).
+            </li>
+            <li>
+              Kuttet ut utskrift av SQL-kode igjen.
+            </li>
+          </ul>
+          <p><strong>16.11.2003</strong></p>
+          <ul>
+            <li>GUIet er pusset litt opp</li>
+            <li>Oversatt til engelsk</li>
+            <li>"Om RelasJonsalgebra"-dialog</li>
+            <li>
+              Forbedret kommandolinjeargumentene: Kan nå ta property-verdier som argumenter, f.eks.
+              <code>connect.hosts=mindbtjener.mittdomene.no</code> m.m. I teorien skal det nå til og med gå an å få det til å funke med andre databasetyper bare ved å endre på jnlp-fila.
+            </li>
+          </ul>
+          <p><strong>10.01.2001</strong></p>
+          <ul>
+            <li>Diagrammet kan skrolles hvis det blir større enn vinduet.</li>
+            <li>GUIet er forbedret litt</li>
+          </ul>
+          <p><strong>18.01.2000</strong></p>
+          <ul>
+            <li>
+              Differensnoden sjekker nå x-rekkefølgen på inn-nodene sine for å bestemme operandrekkefølgen.
+            </li>
+            <li>
+              Naturlig Join-noden sjekker også x-rekkefølgen, slik at attributtene til noden til venstre kommer i lista til venstre, og omvendt.
+            </li>
+            <li>
+              Jeg støtter nå Property-ene <code>autoalias=true/false</code> og <code>antialias=true/false</code> i
+              algebra.properties-fila.
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top"><a name=evaluering>Evaluering</a></td>
+        <td>
+          <form action="mailto:heggland@idi.ntnu.no?subject=Algebraevaluering" method="post" enctype="text/plain">
+            <p>
+            <table>
+              <tr>
+                <td align=right>Jeg synes Jons RelasJonsalgebraprogram er</td>
+                <td>
+                  <select name=program>
+                    <option value=teit>teit</option>
+                    <option selected value="grei nok">greit nok</option>
+                    <option value=kult>kult</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td align=right>Jeg synes denne brukerveiledningen er</td>
+                <td>
+                  <select name=brukerveiledning>
+                    <option value=teit>teit</option>
+                    <option selected value="grei nok">grei nok</option>
+                    <option value=kul>kul</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td align=right>Jeg synes denne evalueringen er</td>
+                <td>
+                  <select name=evaluering>
+                    <option value=teit>teit</option>
+                    <option selected value="grei nok">grei nok</option>
+                    <option value=kul>kul</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+              Andre kommentarer:<br/>
+              <textarea name="ellers" cols="60" rows="10" wrap="soft">
+              </textarea>
+              <br/>
+              <input type="submit" value="Send til Jon">
+            </p>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td class="left" valign="top"><a name="referanser">Referanser</a></td>
+        <td>
+          <ul>
+            <li>
+              <b><a name="date">[Date]</a></b>
+              C. J. Date: <i>An Introduction to Database Systems</i>, International Edition, åttende utgave, Addison-Wesley 2004
+            </li>
+            <li>
+              <b><a name="elmasrinavathe">[Elmasri og Navathe]</a></b> Ramez Elmasri og Shamkant B. Navathe: <i>Fundamentals of Database Systems</i>, International Edition, tredje utgave, Addison-Wesley 2000
+            </li>
+            <li>
+              <b><a name="garcia-molina">[Garcia-Molina m.fl.]</a></b> Hector Garcia-Molina, Jeffrey D. Ullman og Jennifer Widom: <i>Database Systems &#150; The Complete Book</i>, Prentice Hall 2002
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+
+

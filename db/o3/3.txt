@@ -1,0 +1,59 @@
+3a)
+
+SELECT tittel FROM bok;
+
+3b)
+
+SELECT *
+FROM forfatter
+WHERE nasjonalitet = ’Norsk’;
+
+3c)
+
+SELECT forlag , navn , telefon FROM forlag
+WHERE adresse = ’Oslo’
+ORDER BY forlagnavn;
+
+3e)
+
+SELECT b.tittel , b.utgittår
+FROM bok b, bokforfatter bf, forfatter f WHERE b.bokid = bf.bokid
+AND f.forfatterid = bf.forfatterid
+AND f.fornavn = 'Knut' AND f.etternavn = 'Hamsun';
+
+3f)
+
+SELECT fornavn, etternavn, fødeår FROM forfatter WHERE 
+etternavn LIKE "H%";
+
+
+3i)
+
+SELECT f.fornavn , f.etternavn ,
+(SELECT count(*)
+FROM bokforfatter bf
+WHERE bf.forfatterid = f.forfatterid)
+AS "NumberOfBooks"
+FROM forfatter f
+ORDER BY NumberOfBooks DESC;
+
+3j)
+
+SELECT tittel , utgittår
+FROM bok b
+ORDER BY utgittår ASC LIMIT 1;
+
+3k)
+
+SELECT f.forlagnavn ,
+(SELECT count(*)
+FROM bok b
+WHERE f.forlagid = b.forlagid)
+AS "NumberOfBooks"
+FROM forlag f HAVING NumberOfBooks > 2;
+
+3l)
+
+SELECT f.forlagnavn FROM forlag f
+WHERE f.forlagid NOT IN
+(SELECT b.forlagid FROM bok b);

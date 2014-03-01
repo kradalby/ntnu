@@ -86,13 +86,14 @@ else:
 
 
 mailfrom = b"<dummy@dfekt.no>\n"
-rcptto = b"<kradalby@dfektlan.no>\n"
+rcptto = b"<kradalby@kradalby.no>\n"
 data = b"DATA\n"
 subject = b"TESTY\n"
 message = b"""HEI DIN TEST
 
 heprasdg
 sdag
+ru
 adfg
 ds
 fh
@@ -100,7 +101,6 @@ fh
 mvh
 kraddemail\n
 """
-end = b".\n"
 quit = b"QUIT\n"
 
 
@@ -132,23 +132,24 @@ if recv[:3] != b'354':
 else:
     print(recv)
 
-print(msg)
-clientSocket.send(msg)
-#recv = clientSocket.recv(1024)
+
+clientSocketSecure.send(b"Subject: " + subject + b'\r\n\r\n')
+clientSocketSecure.send(message)
+#recv = clientSocketSecure.recv(1024)
 #if recv[:3] != 250:
 #    sys.exit(b"Error here: " + recv)
 #else:
 #    print(recv)
 
-clientSocket.send(end)
-recv = clientSocket.recv(1024)
+clientSocketSecure.send(endmsg)
+recv = clientSocketSecure.recv(1024)
 if recv[:3] != b'250':
     sys.exit(b"Error here: " + recv)
 else:
     print(recv)
 
-clientSocket.send(quit)
-recv = clientSocket.recv(1024)
+clientSocketSecure.send(quit)
+recv = clientSocketSecure.recv(1024)
 if recv[:3] != b'221':
     sys.exit(b"Error here: " + recv)
 else:

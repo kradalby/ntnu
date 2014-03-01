@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram height="564" made_with_version="1.5" name="oppg2b" width="818">
-<entity id="0" is_weak="false" name="Handel" x="24" y="37">
+<entity id="0" is_weak="true" name="Handel" x="24" y="37">
 <attributes>
 <attribute is_hidden="false" is_key="true" name="handelnr" type=""/>
 <attribute is_hidden="false" is_key="false" name="dato" type=""/>
@@ -43,7 +43,7 @@
 <connection connection_side="3" direction="1" object_id="4" relation_point_x="62" relation_point_y="218"/>
 </line>
 <line cardinality_string="(1,n)" has_u="false" id="6" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="3" direction="1" object_id="0" relation_point_x="53" relation_point_y="109"/>
+<connection connection_side="3" direction="1" object_id="0" relation_point_x="57" relation_point_y="117"/>
 <connection connection_side="1" direction="1" object_id="4" relation_point_x="62" relation_point_y="186"/>
 </line>
 <line cardinality_string="(0,n)" has_u="false" id="9" is_weak="false" role="" style="0" turned="false">
@@ -59,7 +59,7 @@
 <connection connection_side="2" direction="0" object_id="7" relation_point_x="160" relation_point_y="83"/>
 </line>
 <line cardinality_string="(1,1)" has_u="false" id="12" is_weak="false" role="" style="0" turned="false">
-<connection connection_side="2" direction="0" object_id="0" relation_point_x="82" relation_point_y="73"/>
+<connection connection_side="2" direction="0" object_id="0" relation_point_x="90" relation_point_y="77"/>
 <connection connection_side="0" direction="0" object_id="7" relation_point_x="128" relation_point_y="83"/>
 </line>
 </diagram>

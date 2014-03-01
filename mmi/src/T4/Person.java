@@ -13,7 +13,7 @@ public class Person {
     private String dateOfBirth;
     private Gender gender;
     private String email;
-    private Integer height;
+    private Integer height = 170;
 
 
     public Person(String name) {

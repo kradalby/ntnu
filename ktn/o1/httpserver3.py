@@ -45,7 +45,7 @@ while True:
         print(outputdata)
         print(bytes(outputdata, 'utf-8'))
 
-        #connectionSocket.send(bytes('HTTP/1.1 200 OK\n\r', 'utf-8'))
+        connectionSocket.send(bytes('HTTP/1.1 200 OK\n\r', 'utf-8'))
         connectionSocket.send(bytes('Content-Type: text/html; charset=UTF-8\n\r', 'utf-8'))
         connectionSocket.send(bytes('Connection: close\n\r', 'utf-8'))
         connectionSocket.send(bytes(outputdata, 'utf-8'))

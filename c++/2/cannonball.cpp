@@ -25,7 +25,18 @@ double velY(double startSpeed, double time) {
     return startSpeed + (acclY() * time);
 }
 
-double velIntY(double startSpeed, double time);
+double velIntY(double startSpeed, double time) {
+    
+    int steps = time/10;
+
+    double speedY = startSpeed;
+    for (int i = 1; i < steps; i++) {
+        speedY = (speedY + acclY()) * i;
+    }
+
+    return speedY;
+}
+
 
 double posY(double startSpeed, double time) {
     double a = ((0.5) * acclY() * pow(time, 2));
