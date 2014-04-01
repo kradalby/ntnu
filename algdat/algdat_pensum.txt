@@ -82,4 +82,5 @@ Pensumoversikt høsten 2013 - Kapitler med navn
 26.2    The Ford-Fulkerson method
 26.3    Maximum bipartite matching
 
+
 34.5    NP-complete problems
