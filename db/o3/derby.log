@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-2014-02-27 13:50:19.954 GMT:
- Booting Derby version The Apache Software Foundation - Apache Derby - 10.3.2.1 - (599110): instance c013800d-0144-739c-30e2-00000b60c160
+2014-04-30 13:01:52.652 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.3.2.1 - (599110): instance c013800d-0145-b2ba-1c43-00000c870de8
 on database directory /Users/kradalby/git/ntnu/db/o3/bokbase  
 
 Database Class Loader started - derby.database.classpath=''

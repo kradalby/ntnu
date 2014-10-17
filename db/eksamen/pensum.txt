@@ -1,0 +1,42 @@
+# ToDo
+
+Generelt databasedesign
+ER
+Relasjonsalgebra
+SQL
+Funksjonelle avhengighet
+Closure
+Nøkler
+    Supernøkkel
+    Nøkkel
+    Kandidatnøkkel
+Normalform
+    1NF
+    2NF
+    3NF
+    Boyd
+Hashing
+    Extendible hashing
+    Statisk hashing
+    Linær hashing
+Transaksjon
+    ACA
+    Schedule
+    Rollback
+
+Låsing
+    Vranglås
+    Tofaselåsing
+Logging
+Recovery
+    ARIES
+Rereranseintegritet
+Lagring
+    B-trær
+    B+-trær
+Indekser
+
+
+
+
+
