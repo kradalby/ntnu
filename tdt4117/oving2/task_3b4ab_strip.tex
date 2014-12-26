@@ -1,0 +1,81 @@
+\subsection*{Deloppgave b}
+
+\vspace{3 mm}
+
+\subsubsection*{Automatic Global Analysis vs. Automatic Local Analysis}
+Med Automatic Global Analysis bygger man tesaurus fra alle dokumentene som finnes, mens med Automatic Local Analysis bygger man tesaurus fra de dokumentene som den initielle spørringen returnerte som resultat. Tesaurus er synonymer/relasjonsord som brukt til å ekspandere spørringen.
+
+\vspace{6 mm}
+
+\section*{Oppgave 4 - Evaluation of IR-systems}
+
+\subsection*{Deloppgave a}
+
+\vspace{3 mm}
+
+\subsubsection*{Precision}
+Pricision eller på godt norsk Presisjon, er en beskrivelse av resultatet på en spørring. Det kan også omhandle IR systemet i sin helhet, hvor man finner den generelle presisjonen til systemet ved å ta snittet av presisjonene for en større samling spørringer. Pricision er prosentandelen av dokumentene som er relevante (for spørringen) fra en samling dokumenter, der samlingen med dokumenter er det IR systemet har returnert som svar på spørringen. Med denne målingen kan vi evalurere hvor godt systemet filtrer ut urelevante dokumenter, og sannsynligheten for at et gitt dokument er relevant.
+
+\vspace{3 mm}
+
+\begin{center}
+$Precision = \frac{\mid Relevant \ and \ Retrieved \mid}{\mid Retrieved \mid}$
+\end{center}
+
+\vspace{3 mm}
+
+Dersom et søk returnerer 1000 dokumenter, og 200 av dem er relevante, hjelper det brukeren svært lite dersom alle de relevante dokumentene befinner seg blant de 200 siste i lista. Derfor bruker man P@10 eller P@20, hvor man kun ser på de 10 eller 20 første dokumentene som returneres.
+
+\vspace{3 mm}
+
+\subsubsection*{Recall}
+Svaret på en spørring er en mengde dokumenter, denne mengden består som regel av relevante og urelevante dokumenter, avhengig av presisjon. Men denne mengden er bare et subset av en enda større mengde dokumenter, bedre kjent som alle dokumentene systemet er i stand til å finne. Blant alle disse dokumentene finnes de dokumentene vi fikk som svar, og dokumenter som vi ikke fikk som svar. Ofte er det slik at noen av de dokumentene som er relevante befinner seg i mengden vi ikke fikk som svar, og vi sitter derfor igjen med kun et subset av de relevante dokumentene. Recall beskriver denne oppførselen, og kan bli sett på som sannsynligheten for at et relevant dokument blir returnert for en gitt spørring.
+
+\vspace{3 mm}
+
+\begin{center}
+$Recall = \frac{\mid (Relevant \ documents) \ \cup \ (Retrieved documents) \mid}{\mid Relevant \ Documents \mid}$
+\end{center}
+
+\vspace{3 mm}
+
+Enkelt sagt omhandler både Recall og Pricision dokument relevans, forskjellen mellom disse er at Recall tar for seg hvor mange av det totale antallet relevante dokumenter ble returnert, mens Pricision tar for seg hvor mange av de returnerte dokumentene som er relevante.
+
+\vspace{3 mm}
+
+Pricision og recall er inverst relatert, dersom recall øker, synker precision. Dette er en ulempe dersom vi ønsker å få alle relevante dokumenter returnert for en spørring, men unngå flest mulig urelevante dokumenter.
+
+\vspace{6 mm}
+
+\subsection*{Deloppgave b}
+
+\vspace{3 mm}
+
+Vi antar at man skal finne presicion for de 10 første dokumentene, hvor rekkefølgen er fra venstre til høyre i samlingen d.
+
+\vspace{3 mm}
+
+$d = \{2,6,72,10,84,15,13,66,37,45,12,201,33,94,22\}$
+
+\vspace{3 mm}
+
+$r = \{2,7,103,201,22,45,33\}$
+\vspace{6 mm}
+
+\noindent Følgende er løsningen for precision:
+
+\vspace{3 mm}
+
+\begin{center}
+$P_{@10} = \frac{4}{10}$
+\end{center}
+
+\vspace{3 mm}
+
+\noindent Følgende er løsning for recall:
+
+\vspace{3 mm}
+
+\begin{center}
+$R = \frac{4}{7}$
+\end{center}

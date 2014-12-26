@@ -1,0 +1,126 @@
+\lstset{language=Java,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\footnotesize,
+frame=shadowbox,
+breaklines=true}
+
+\section*{Oppgave 3 - Lucene's Boolean Query Model}
+
+Den utdelte koden vil først instansiere et \textit{BooleanQuery}-objekt som kan representere en boolsk konjunktiv normalform på formen:
+
+\vspace{2mm}
+
+\begin{center}
+(V$_{1}$ $\wedge$ $\dots$ V$_{n}$) \hfill \\
+\end{center}
+
+\vspace{2mm}
+
+Det neste den gjør er å instansiere et \textit{StringTokenizer}-objekt som deler opp spørringen i single termer og har en iterator, som gjør det lett å iterere over alle termene.
+
+Deretter vil \textit{while-loopen} legge til en \textit{TermQuery} til den boolske spørringen, med en boolsk \textit{MUST}-kondisjon på hver term, noe som tilsvarer \textit{logisk OG}. Med dette bygges det en \textit{BooleanQuery} som representerer en boolsk spørring på konjunktiv normalform. Så svaret på hvordan boolsk spørring som prosesseres med denne koden er:
+
+\vspace{2mm}
+
+\begin{center}
+\textit{BooleanClause.Occur.MUST} er det samme som \textit{AND}
+\end{center}
+
+\vspace{5mm}
+\noindent \textbf{Resultater ved å kjøre med MUST-clause:} \hfill
+
+\vspace{2mm}
+\noindent \textbf{Søkeord: \textit{apple}} \hfill
+
+\begin{lstlisting}[frame=single]
+    Searching for: +apple 
+    7 total matching documents 
+    1. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc7.txt 
+    2. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc2.txt 
+    3. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc4.txt 
+    4. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc10.txt
+    5. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc1.txt 
+    6. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc3.txt 
+    7. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc5.txt 
+\end{lstlisting}
+
+\noindent \textbf{Søkeord: \textit{apple, grape}} \hfill
+
+\begin{lstlisting}[frame=single]
+    Searching for: +apple +grape
+    4 total matching documents
+    1. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc2.txt 
+    2. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc10.txt 
+    3. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc3.txt 
+    4. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc5.txt 
+\end{lstlisting}
+
+\noindent \textbf{Søkeord: \textit{apple, grape, melon}} \hfill
+
+\begin{lstlisting}
+    Searching for: +apple +grape +melon 
+    3 total matching documents 
+    1. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc10.txt 
+    2. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc3.txt 
+    3. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc5.txt
+\end{lstlisting}
+
+\vspace{2mm}
+
+\noindent Videre, for å kunne gjennomføre et \textit{logisk ELLER}-søk så må vi endre litt på den utdelte koden. For å tilfredstille et \textit{ELLER}-søk må:
+
+\begin{center}
+\textit{BooleanClause.Occur.MUST} byttes ut med \textit{BooleanClause.Occur.SHOULD}
+\end{center}
+
+\newpage
+\noindent Koden vil da se slik ut:
+
+\lstinputlisting[language=Java, firstline=1, lastline=6, frame=single]{oppg3.java}
+
+\vspace{5mm}
+
+\noindent \textbf{Resultater ved å kjøre med SHOULD-clause} \hfill
+
+\noindent \textbf{Søkeord: \textit{apple}} \hfill
+\begin{lstlisting}[frame=single]
+Searching for: apple
+    7 total matching documents
+    1. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc7.txt
+    2. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc2.txt
+    3. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc4.txt
+    4. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc10.txt
+    5. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc1.txt
+    6. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc3.txt
+    7. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc5.txt
+\end{lstlisting}
+
+\noindent \textbf{Søkeord: \textit{apple, grape}} \hfill
+\begin{lstlisting}[frame=single]
+Searching for: apple grape
+    8 total matching documents
+    1. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc2.txt
+    2. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc10.txt
+    3. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc3.txt
+    4. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc5.txt
+    5. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc9.txt
+    6. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc7.txt
+    7. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc4.txt
+    8. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc1.txt
+\end{lstlisting}
+
+\noindent \textbf{Søkeord: \textit{apple, grape, melon}} \hfill
+\begin{lstlisting}
+Searching for: apple grape melon
+    10 total matching documents
+    1. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc10.txt
+    2. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc3.txt
+    3. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc5.txt
+    4. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc2.txt
+    5. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc9.txt
+    6. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc1.txt
+    7. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc4.txt
+    8. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc7.txt
+    9. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc6.txt
+    10. /Users/hakloev/git/TDT4117/oving3/java/src/apple/doc8.txt
+\end{lstlisting}

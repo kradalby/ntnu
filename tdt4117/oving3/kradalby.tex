@@ -1,0 +1,66 @@
+\lstset{language=Java,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\footnotesize,
+frame=shadowbox,
+breaklines=true}
+
+
+\section*{Oppgave 2 - Lucene}
+
+\subsection*{Hva er Lucene}
+Lucene er et rammeverk/biblotek for informasjons gjenfinning. Det er skrevet i java av Doug Cutting og er idag blitt et veldig omfattende prosjekt som er mye brukt for å bygge applikasjoner for informasjonsgjenfinning. Kjerne konseptet med Lucene er at et dokument inneholder mange felter med tekst. Dette gjør at Lucene kan brukes på mange forskjellige filtyper, altså alle filer hvor det er mulighet å hente ut tekst. Lucene er også skrevet om til flere andre programmeringspråk som python og C++.
+
+\subsection*{Indeksering med Apache Lucene}
+I eksempelprogrammet vi har fått utdelt starter selve indekseringsprosessen i metoden indexDocs. Før denne metoden blir kalt kjøres hovedsaklig lesing og forberedelse av filen.
+I indexDocs metoden kjøres det først en sjekk om paramteret som mottas er en fil eller en mappe. Hvis det er en mappe vil metoden rekursivt på seg selv over alle filene i mappen.\\
+Når funksjonen så får en fil vil den begynne indekseringsprosessen. Dette starter med:
+
+\lstinputlisting[language=Java, firstline=20, lastline=23]{example.java}
+Det første som skjer når programmet starter etter det har tatt inn alle input paramerne er å gi output til brukeren om hva som skal analyseres. Deretter starter programmet med å instansiere et nytt Directory objekt som holder styr på hvilket direktiv som skal indekseres. Når dette er gjort vil den lage en ny analyzer som instansierer StandardAnalyzer med Lucene versjonen vi bruker. Denne sendes inn som et parameter i IndexWriterConfig som holder all konfigurasjonen for IndexWriteren som blir laget senere.
+
+\lstinputlisting[language=Java, firstline=24, lastline=28]{example.java}
+For å konfigurere IndexWriteren sjekker vi om det ble sendt med et paramterer om å lage en ny indeks eller oppdatere en gammel.
+
+\lstinputlisting[language=Java, firstline=29, lastline=30]{example.java}
+Til slutt før selve indekseringen startes opprettes en IndexWriter, denne har som oppgave å lage og håndtere/vedlikeholde en indeks. Som argument blir direktivet og konfigurasjonen som ble laget tidligere lagt med.
+
+\lstinputlisting[language=Java, firstline=1, lastline=1]{example.java}
+Her instansieres et nytt dokument som skal representere filen ferdig indeksert.
+
+\lstinputlisting[language=Java, firstline=2, lastline=4]{example.java}
+Deretter begynner man å fylle filen med data om filen, denne kodebiten legger inn filstien fra orginalfilen til et felt i det nye, indekserte dokumentet. 
+
+\lstinputlisting[language=Java, firstline=5, lastline=7]{example.java}
+Det vil også bli lagt til et felt hvor det lagres når den orginale filen ble sist modifisert.
+
+\lstinputlisting[language=Java, firstline=8, lastline=8]{example.java}
+Til slutt i indekseringsprosessen vil filen bli åpnet i en leser for å indeksere filen og legge resultatet til som et felt i dokumentet. Her blir også UTF-8 valgt får å korrekt håndtere spesialtegn.
+\lstinputlisting[language=Java, firstline=9, lastline=19]{example.java}
+Til slutt vil den indekserte dokumentet bli skrevet til et nytt indeksert dokument. Det kan som vist også bli oppdatert om filen allerede finnes fra før.
+
+
+\begin{lstlisting}[frame=single]  % Start your code-block
+/home/kradalby/workspace/ir_assignment3/src/apple
+Indexing to directory 'index'...
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc10.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc1.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc6.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc8.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc4.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc9.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc2.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc5.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc7.txt
+adding /home/kradalby/workspace/ir_assignment3/src/apple/doc3.txt
+378 total milliseconds
+\end{lstlisting}
+\pagebreak
+\subsection*{Søk med Apache Lucene}
+\noindent \textbf{Søkeord: \textit{apple}}
+\lstinputlisting{search/apple.txt}
+\noindent \textbf{Søkeord: \textit{apple grape}}
+\lstinputlisting{search/applegrape.txt}
+\noindent \textbf{Søkeord: \textit{apple grape melon}}
+\lstinputlisting{search/applegrapemelon.txt}
+
+I disse søkene blir booleanmodellen brukt som querymodell, da de returnerte dokumentene, altså logisk ELLER.

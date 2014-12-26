@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Aleksander Skraastad, Fredrik Tørnvall, Kristoffer Dalby ">
+    <title>Site analysis</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="aboutme.html">About me</a></li>
+            <li><a href="index.html">Assignments</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="project.html">Project</a></li>
+        </ul>
+    </nav>
+    <br>
+    <hr>
+    <section class="container">
+        <section class="navbar">
+            <h1>Assignment 4</h1>
+            <h3>Participants</h3>
+            &raquo; Aleksander Skraastad <small>(aleksans)</small><br />
+            &raquo; Fredrik Tørnvall <small>(tornvall)</small><br />
+            &raquo; Kristoffer Dalby <small>(kristoad)</small>
+            <h3>Shortcuts</h3>
+            <section>
+                <ul id="navul">
+                    <li><a href="#task1">Lings Cars</a></li>
+                    <li><a href="#task2">Europcar</a></li>
+                    <li><a href="#draft">Project overview</a></li>
+                </ul>
+            </section>
+        </section>
+        <section class="analysis">
+            <div class="yolo50">
+                <h3 id="task1"><a href="http://lingscars.com">Lings cars</a></h3>
+                <h4>Title:</h4>
+                <p>
+                    Following the steps given at <a href="www.w3.org">W3C</a> to evaluate the titles at <a href="http://www.lingscars.com">Lingscars.com</a> we see  that the titles are too long and in some cases the titles do not even mach the site we have navigated to. An example of this is that when we navigate to "How it works" the title reads "Audi A4 leasing".
+                </p>
+                
+                <h4>Image/text alternatives:</h4>
+                <p>
+                    Some of the images on the page has alt tags, but the majority does not. This is not following the HTML convention. Nothing will be displayed if the image isn´t loaded where there is no  alt tag. 
+                </p>
+                
+                <h4>Headings:</h4>
+                <p>
+                    Using <a href="http://validator.w3.org/">W3C Validator</a> to get an outline of the page and looking at the source code, we see that there is no consistency in the use of headings. The heading tags that are there typically three on each page does not have a meaningful hierarchy. 
+                </p>
+                
+                <h4>Contrast ratio:</h4>
+                <p>
+                    <a href="http://www.lingscars.com">Lingscars.com</a> is an example of a noisy page. The use of colours and backgrounds is a complete mess. This makes the page hard to read. There is no indication in the menu bar telling the user which site he/she is on. And the use of animated gifs makes the navigation even harder. This webpage should come with an epileptic warning. 
+                </p>
+                
+                <h4>Resize text:</h4>
+                <p>
+                    There is no scaling on the page. They have a mobile version of the site with the same design philosophy. However is is possible to zoom with your browser. Doing this the text will become larger and easier to read. On the other hand the page has a menu on the right hand   side which will obscure some of the site if you zoom.
+                </p>
+                
+                <h4>Keyboard access and visual focus:</h4>
+                <p>
+                    It is not impossible to navigate the site using only keyboard, but it is not practical at all. Every site under the domain lingscars.com is cluttered with information and with large amounts links. This makes navigating the page using only keyboard hard. Which item is in focus is not really visible due to all the colours and animated gifs.
+                </p>
+                
+                <h4>Forms, labels and errors:</h4>
+                <p>
+                    There are some forms on the page. One of this forms are a form for requesting a car lease. This form has checks for correct email and that the user enters a valid password. It does not mark fields as mandatory and does not contain placeholder text only labels. 
+
+                </p>
+                
+                <h4>Multimedia alternatives:</h4>
+                <p>
+                    Where to start? There is an overwhelming use of different multimedia on Ling´s webpage. We have videos explaining how to use the page, music to entertain you while you brows the page, pictures with explanations and gifs to help you navigate. There is no way to turn of the music. The user can chose whether or not to play the videos. The multimedia options is clearly for entertainment purposes not to help hearing or visually impaired costumers. 
+
+                </p>
+                
+                <h4>Basic structure check</h4>
+                <p>
+                    Removing CSS and images on the site completely ruins it. It is no longer possible to navigate the page. 
+
+                </p>
+                
+                <h4><a href="pdf/evaluating-ling.pdf">Checklist from UoM</a></h4>
+            </div>
+            <div class="yolo50">
+                <h3 id="task2"><a href="http://europcars.com/">Europcars</a></h3>
+                <h4>Title:</h4>
+                <p>Every page has a good descriptive title, it gives us a brief overview of what the content of the current subsite will be. The titles also tells us the company name. Every page has a unique title.</p>
+                
+                <h4>Image/text alternatives:</h4>
+                <p>All the images that we have found on the webpage has an "alt" tag. This will result in a backup text string if the picture is not loaded for some reason.</p>
+                
+                <h4>Headings:</h4>
+                <p>When it comes to headings, Europcar has a semi-correct hierarchy. The different sizes is not used directly togheter and there is no immediate logical structure to speak of. Europcar also uses very strange class names for their header tags. The header class for the h2 tag has been given the name h3. This is quite confusing and very difficult to wrap ones head around.</p>
+                
+                <h4>Contrast ratio:</h4>
+                <p>As far as we can see, the page does not offer any controlpanel or menu that helps a user change the contrast on the website. This is not good as i may be harder for some people to navigate. The site has many different colors and different blends of contrast around the site. On a side-note, this is a built in functionality of most modern browsers, so it is only a minor nuisance.</p>
+
+                <h4>Resize text:</h4>
+                <p>The website scales very good with both zoom, pinch to zoom and the mobile version of the site is good. This makes it easier for most people to use the site.</p>
+
+                <h4>Keyboard access and visual focus:</h4>
+                <p>The site is almost totaly unsusable without a mouse or a touchpad. You can only access two fields on the site using only the keyboard. The searchfield and the choose language field is available, but none of the links, images and login works at all with keyboard only.</p>
+
+                <h4>Forms, labels and errors:</h4>
+                <p>There are a lot of date and time fields which all have error handling with good feedback. The registration form has email and password validation. The labels are working effectively, and informs the users in a reasonable way when there is an error.</p>
+
+                <h4>Multimedia alternatives:</h4>
+                <p>There are no videos on the page, and the images have alt tags. But there is an interactice map of all Europcar stations around the world, which we could not find
+                an alternative view form of. So if for some reason you are on a very slow network, or you're having issues with JavaScript, there is no alternative way to view
+                this map.</p>
+
+                <h4>Basic structure check</h4>
+                <p>After the CSS has been removed from the site, the structure is still somewhat there. The page will not have any columns and the page will be very long, and the time it takes to find the information we are looking will take considreble longer to find.</p>
+
+                
+                <h4><a href="pdf/evaluating-europcar.pdf">Checklist from UoM</a></h4>
+            </div>
+        </section>
+        <hr>
+        <section class="draft">
+            <h2 id="draft">Project overview</h2>
+            <p>The primary goal of our web site is to provide car rental services, through an online display and booking site.</p>
+            <p>We will provide a product catalogue of 6 different cars, in different price ranges and categories of use. Our focus
+            will be on simplicity in design, detailed description and navigation, and interactive elements to ensure ease of access
+            and an excellent customer experience.</p>
+
+            <h3>Site structure</h3>
+            <p>We will have 11 pages on our website, adhering to the following overall structure.</p>
+            <ul>
+                <li>Home </li>
+                <li>Cars
+                    <ul>
+                        <li>Car 1</li>
+                        <li>Car 2</li>
+                        <li>Car 3</li>
+                        <li>Car 4</li>
+                        <li>Car 5</li>
+                        <li>Car 6</li>
+                    </ul>
+                </li>
+                <li>Contact</li>
+                <li>Locations</li>
+                <li>About Shiny-Octo-Shame Car Rental</li>
+            </ul>
+            <p>The home page will be our primary attention-grabbing page. Here, we will extrude links to subpages that are
+            of particular interest to the customer. E.g cars that are in reduced cost campaigns, booking form, etc.</p>
+            <p>The "Cars" subpages of the hierarchy will aquire data from our backend to display the different cars
+            on a single car template. Based on the data the API returns, the page will be dynamically updated.</p>
+            <p>The main "Cars" page will be an overview of the current cars, and will be sortable by different
+            parameters, such as brand, price, number of seats and availability.</p>
+
+            <h3>Customer Profile</h3>
+            <p>Our customers will come from a broad range of ages, cultural background and of both sexes.</p>
+            <p>This means we will have to have an intuitive and clean design, with clear structure and
+            navigation. One of our thougts is to implement interactive help-boxes, and have a structurally large
+            scaled site (text, components etc).</p>
+            <p>Additionally our site will be responsive, to allow accessibility from different platforms and devices.</p>
+
+            <h3>Multimedia content</h3>
+            <p>Our site will for the most part provide text and images, but embedded youtube videos of our rental cars will also
+            be a possibility. Additionally, we will provide a google map with locations to our pickup and delivery stations,
+            as well as a textual representation of the same content, to provide alternate/fallback representations.</p>
+
+            <h3>Interactivity</h3>
+            <p>We will use JavaScript to provide interactive hints and tips, expand dialog-boxes etc. We will also use AJAX-calls
+            to load pagelets and other structured data in the background to allow quick interaction with the site,
+            with less pageloads visible to the user.</p>
+
+            <p>We will implement an API based on Bottle or Flask, which are python API frameworks, to serve as our backend data
+            provider for our client scripts.</p>
+
+            <h3>Content aquirement</h3>
+            <p>For the most part, we will write the text ourselves. Images and other media content will be &laquo;borrowed&raquo;
+            from wheverver Google Search leads us, albeit credited in an orderly fashion.</p>
+
+            <h3>What we learned from analysis</h3>
+            <p>The most prolific thing we saw was that even good sites have errors. And the bad sites are, well. Really really bad.</p>
+            <p>If one takes a quick glance at <a href="http://www.lingscars.com">Lingscars.com</a>, there is a small chance that you will develop
+            epilepsy and suffer from it immediately. It is hard to believe that this is an actual site, that provides the service it
+            advertises to do. The analysis part of this was somewhat horrendous, and caused mild nausea in one of the participants of this
+            group.</p>
+            <p>This demonstrates that the web is a large and diverse place, with various degrees of best practice, and no practice taken
+            into consideration when the web sites were developed. One thing is for sure though, we will heavily base our degree of success
+            on how different from <a href="http://www.lingscars.com">Lingscars.com</a> our site is.</p>
+            <p>What content to promote, and what can be moved to subpages, in addition to similar tips were taken into consideration
+            from <a href="http://www.europcar.com">Europcar</a>, as they are a leading brand in the industry.</p>
+        </section>
+    </section>
+    <footer>
+        <hr>
+        k-dawg derpvelopment!
+    </footer>
+</body>
+</html>

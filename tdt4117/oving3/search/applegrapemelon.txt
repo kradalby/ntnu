@@ -1,0 +1,15 @@
+Enter query: 
+apple grape melon
+Searching for: apple grape melon
+10 total matching documents
+1. /home/kradalby/workspace/ir_assignment3/src/apple/doc10.txt
+2. /home/kradalby/workspace/ir_assignment3/src/apple/doc3.txt
+3. /home/kradalby/workspace/ir_assignment3/src/apple/doc5.txt
+4. /home/kradalby/workspace/ir_assignment3/src/apple/doc2.txt
+5. /home/kradalby/workspace/ir_assignment3/src/apple/doc9.txt
+6. /home/kradalby/workspace/ir_assignment3/src/apple/doc1.txt
+7. /home/kradalby/workspace/ir_assignment3/src/apple/doc4.txt
+8. /home/kradalby/workspace/ir_assignment3/src/apple/doc7.txt
+9. /home/kradalby/workspace/ir_assignment3/src/apple/doc6.txt
+10. /home/kradalby/workspace/ir_assignment3/src/apple/doc8.txt
+Press (q)uit or enter number to jump to a page.

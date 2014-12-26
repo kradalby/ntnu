@@ -1,0 +1,13 @@
+Enter query: 
+apple grape
+Searching for: apple grape
+8 total matching documents
+1. /home/kradalby/workspace/ir_assignment3/src/apple/doc2.txt
+2. /home/kradalby/workspace/ir_assignment3/src/apple/doc10.txt
+3. /home/kradalby/workspace/ir_assignment3/src/apple/doc3.txt
+4. /home/kradalby/workspace/ir_assignment3/src/apple/doc5.txt
+5. /home/kradalby/workspace/ir_assignment3/src/apple/doc9.txt
+6. /home/kradalby/workspace/ir_assignment3/src/apple/doc7.txt
+7. /home/kradalby/workspace/ir_assignment3/src/apple/doc4.txt
+8. /home/kradalby/workspace/ir_assignment3/src/apple/doc1.txt
+Press (q)uit or enter number to jump to a page.

@@ -1,0 +1,21 @@
+Suffix array, trie og tree
+Hvorfor er index terms viktig.
+Inverted index
+Multimedia modellen
+Document preprocessing
+Forskjellen mellom data og informasjonsgjenfinning.
+Boolske similaritetsmodellen
+Evalurering av IR-system, precision, recall, f-measure, r-precision, MAP, TREC og GOV2
+edit distance
+Multimedia feature
+Kek komplett, effektivt og kompakt.
+Jaccard Coefficient
+Okapi BM25
+TF/IDF
+Automatic local analysis og automatic global analysis
+URF
+Sentralisert og distribuert web søkesystem
+Language model
+Probabilistiske modellen
+Rocchios
+

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+    <!-- setting balance restrictions -->
+    <xs:element name="balance">
+        <xs:simpleType>
+            <xs:restriction base="xs:integer">
+                <xs:minExclusive value="-5000"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    
+    <!-- define element strings -->
+    <xs:element name="name" type="xs:string"/>
+    <xs:element name="address" type="xs:string"/>
+    
+    <!-- define customer_account rules -->
+    <xs:element name="customer_account">
+        <xs:complexType>
+            <xs:attribute ref="customer_id" use="required"/>
+            <xs:attribute ref="account_id" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- define attribute rules -->
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="interest" type="xs:decimal"/>
+    <xs:attribute name="customer_id" type="xs:string"/>
+    <xs:attribute name="account_id" type="xs:string"/>
+
+    <!-- define account and use balance -->
+    <xs:complexType name="account">
+        <xs:sequence>
+            <xs:element ref="balance"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- define savings_account and savings_accounts rules -->
+    <xs:element name="savings_account">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="account">
+                    <xs:sequence>
+                    </xs:sequence>
+                    <xs:attribute ref="id" use="required"/>
+                    <xs:attribute ref="interest" use="required"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="savings_accounts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="savings_account" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+
+    <!-- define checking_account and checking_accounts -->
+    <xs:element name="checking_account">
+        <xs:complexType>
+             <xs:complexContent>
+                <xs:extension base="account">
+                    <xs:sequence>
+                    </xs:sequence>
+                    <xs:attribute ref="id" use="required"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="checking_accounts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="checking_account" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    
+    <!-- define the parrent account rules -->
+    <xs:element name="accounts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="savings_accounts"/>
+                <xs:element ref="checking_accounts"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- define customer and customers rules -->
+    <xs:element name="customer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="name" minOccurs="1"/>
+                <xs:element ref="address" minOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute ref="id" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="customers">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="customer" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- define customer accounts -->
+    <xs:element name="customer_accounts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="customer_account" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!-- define the main parent for all elements -->
+    <xs:element name="bank">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="accounts"/>
+                <xs:element ref="customers"/>
+                <xs:element ref="customer_accounts"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

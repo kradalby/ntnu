@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>o8 e2</title>
+        <script>
+            
+            window.addEventListener("load", function() {
+            
+                var quotes = [
+                    "Trying to fake a conflict",
+                    "Don’t even try to refactor it.",
+                    "fixed mistaken bug",
+                    "Push poorly written test can down the road another ten years",
+                    "Working on tests (haha)",
+                    "derp, helper method rename",
+                    "All your codebase are belong to us.",
+                    "Revert \"just testing, remember to revert\"",
+                    "This solves it.",
+                    "I am even stupider than I thought",
+                ]
+
+                function getRandomQuote(quotes) {
+                    var index = Math.floor((Math.random() * 10));
+                    return quotes[index]
+
+                }
+                
+                var output = document.getElementById("out")
+
+                var p = document.createElement('p')
+                p.innerHTML = getRandomQuote(quotes)
+                output.appendChild(p)
+            
+            })
+            
+
+
+
+        </script>
+    </head>
+    <body>
+        <output id="out"></output>
+    </body>
+</html>

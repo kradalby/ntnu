@@ -1,0 +1,91 @@
+\section*{Oppgave 1 - Language Model}
+\subsection*{Deloppgave a}
+
+\noindent Først la oss si hovedformålet med språkmodellen: Ideen med språkmodellen er å rangerere dokumenter etter sannsynligheten for at dokumentet inneholder/vil kunne generere søkestrengen/spørringen. 
+
+
+Dette fungerer ved at modellen setter en sannsynlighet for en gitt sekvens med ord (spørring) ved hjelp av sannsynlighetsfordeling. Gitt et dokument, vil vi sette opp en språkmodell for dette dokumentet. Dette vil si at hver term i dokumentet gis en vekt basert på sannsynligheten for at det søkes etter den termen i dokumentet. Videre, ved en samling med dokumenter, og en spørring Q, vil dokumentene i samlingen rangeres basert på sannsynligheten for at de vil generere termene i spørringen. Det finnes flere former for språkmodellen, men den vanligste er unigram-modellen. 
+
+\subsubsection*{Fordeler med språkmodellen}
+
+\begin{itemize}
+    \item Effektiv og rask i IR-oppgaver.
+    \item Enkel og lett å bruke.
+    \item Stort sett gode resultater på spørringer
+\end{itemize}
+
+\subsubsection*{Ulemper med språkmodellen}
+
+\begin{itemize}
+    \item Enkle, unigram-modeller som vanskeliggjør å inkludere brukerens tilbakemeldinger eller preferanser.
+    \item Vanskelig å velge gode sannsynligheter for termer.
+    \item Forutsetter at dokumentet at søkestreng omhandler samme tema/er av samme type.
+    \item Må benytte "smoothing-teknikker" istedenfor tf$_{idf}$-vekter.
+\end{itemize}
+
+\subsection*{Deloppgave b}
+
+For å lettere å forstå hvor de ulike termvektene i dokumentet kommer ifra, setter vi opp en språkmodell for hvert dokument:
+
+\noindent P(q \textbar  M$_{d}$) gir oss sannsynligheten for at spørringen q er i et enkelt dokument (ikke tatt hensyn til en samling med dokumenter).
+
+\vspace{2mm}
+
+q = \{NTNU, campus\}
+
+\vspace{2mm}
+
+M$_{1}$ = \{NTNU is a university in Trondheim\}
+
+\vspace{2mm}
+
+\hspace{3.2ex} = \{$\frac{1}{6}$, $\frac{1}{6}$, $\frac{1}{6}$, $\frac{1}{6}$, $\frac{1}{6}$, $\frac{1}{6}$\}
+
+\vspace{2mm}
+
+P(q \textbar  M$_{1}$) = $\frac{1}{6}$
+
+\vspace{5mm}
+
+M$_{2}$ = \{Gløshaugen is a Campus at NTNU, Øya is another campus.\}\footnotemark[1]
+
+\vspace{2mm}
+
+\hspace{3.2ex} = \{$\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$, $\frac{1}{10}$\}
+
+\vspace{2mm}
+
+P(q \textbar M$_{2}$) = $\frac{1}{10}$
+
+\vspace{5mm}
+
+\noindent Videre setter vi opp språkmodell for samlingen:\footnotemark[2]
+\noindent Dette vil si at vi regner ut sannsynligheten for at et dokumentet i samlingen vil generere strengen i spørringen. Med dette kan vi rangere dokumentene.
+
+\vspace{2mm}
+
+$\lambda$ = 0.5
+
+\vspace{2mm}
+
+P(q, d$_{1}$) = ((1-0.5)$\frac{2}{16}$) + (0.5($\frac{1}{6}$))  x  ((1-0.5)$\frac{2}{16}$) + (0.5($\frac{0}{6}$))
+
+\vspace{2mm}
+
+\hspace{8.4ex} = $\frac{7}{48}$  x  $\frac{1}{16}$   =   $\frac{7}{768}$  =  0.00911  
+
+\vspace{4mm}
+
+P(q, d$_{2}$) = ((1-0.5)$\frac{2}{16}$) + (0.5($\frac{1}{10}$))  x  ((1-0.5)$\frac{2}{16}$) + (0.5($\frac{2}{10}$))
+
+\vspace{2mm}
+
+\hspace{8.4ex} = $\frac{9}{80}$  x  $\frac{13}{80}$   =   $\frac{117}{6400}$  =  0.01823  
+
+\vspace{2mm} 
+
+\noindent Som vi ser av dette er d$_{1}$ \textless  d$_{2}$, som tilsier at d$_{2}$ vil rangeres som det beste dokumentet. 
+
+\footnotetext[1]{Vi forutsetter at språkmodellen ikke tar hensyn til store og små bokstaver.}
+\footnotetext[2]{Formelen vi benytter til å regne ut er gitt i oppgaveteksten til oppgave 1b.}
+\pagebreak

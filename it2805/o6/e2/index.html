@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Student registration form</title>
+    </head>
+    <body>
+
+        <div class="container">
+            <h1>Student registration form</h1>
+            <form method="POST" action="http://www.idi.ntnu.no/~michailg/IT2805/form.php">
+                Name: <input required type="text" id="name" name="name"/><br>
+                Email: <input required type="email" id="email" name="email"/><br>
+                Address: <input type="text" id="address" name="address"/><br>
+                Phone: <input type="number" id="phone" name="phone"/><br>
+                Year: <select required name="year">
+                    <option value="1">1st Year-Freshman</option>
+                    <option value="2">2nd Year-Sophmore</option>
+                    <option value="3">3rd Year-Junior</option>
+                    <option value="4">4th Year-Senior</option>
+                </select><br>
+                Start Date: <input required type="date" id="startDate" name="startDate"/><br>
+                Type of student: <select required name="classes[]" multiple="multiple">
+                    <option value="ITX1001">ITX1001: HTML Basics</option>
+                    <option value="ITX1002">ITX1002: URLs and Site Structures</option>
+                    <option value="ITX2001">ITX2001: Introduction to Cascading Style Sheets (CSS)</option>
+                    <option value="ITX2002">ITX2002: CSS Properties and Applications</option>
+                    <option value="ABC1001">ABC1001: Working with Multimedia on the Web</option>
+                    <option value="JSX1000">JSX1000: Introduction to JavaScript</option>
+                    <option value="JSX1040">JSX1040: JavaScript: DOM</option>
+                    <option value="XML1000">XML1000: XML: Formatting Namespace Trees</option>
+                </select><br>
+                Comment: <textarea id="comments" name="comments"></textarea><br>
+                <input type="submit" value="Submit"/><br>
+            </form>
+        </div>
+
+    </body>
+</html>

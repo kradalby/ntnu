@@ -1,0 +1,25 @@
+Sitemap for http://www.ntnu.edu/ime/research
+
+Research
+├── Projects
+│  ├── Coastal and marine operations and surveillance
+│  ├── Robotics
+│  ├── Scientific computing
+│  ├── Smartgrids
+│  ├── BigData
+│  ├── Open and Autonomous Digital Ecosystems
+│  └── Energy efficient computing systems (EECS)
+├── Reporting
+├── High preformance computing
+├── Cooperatin with industry
+├── Acts and legislation
+├── ERCIM
+├── Finance
+└── PhD studies
+   ├── Starting your studies
+   ├── Introduction seminar
+   ├── Study progress
+   ├── Annual progress report
+   ├── Completion
+   ├── After your studies
+   └── Forms

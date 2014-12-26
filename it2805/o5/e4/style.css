@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+}
+
+
+.pull-right {
+    float:right;
+}
+
+.pull-left {
+    float:left;
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
+
+aside {
+    float: left;
+    width: 150px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+section {
+    float: right;
+    width: 650px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+}
+
+.content {
+    padding: 0 0 50px 0;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    font-family: Georgia, serif;
+}
+
+a:hover {
+    font-family: "Comic Sans MS", cursive, sans-serif
+}
+
+.clear {
+    clear: both;
+}

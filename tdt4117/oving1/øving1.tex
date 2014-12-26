@@ -1,0 +1,272 @@
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[norsk]{babel}
+\usepackage{hyperref}
+\usepackage{cases}
+
+\begin{document}
+
+\title{TDT4117 - Øving 1}
+\author{Ole-Christer Selvik, Håkon Løvdal og Kristoffer Andreas Dalby}
+\date{September 2013}
+\maketitle
+
+\section{Oppgave 1}
+\subsection{Inverted index}
+Inverted index er en måte å strukturere indeksert data ved å lage en oversikt som peker fra for eksempel et ord til en lokasjon i en database eller et dokument. Dette er ganske konkret motsatt praksis av indeksering, hvor det er svært vanlig å heller peke fra en nøkkel til en verdi, derav invertert.
+Det er to hovedvarianter av Inverted index, record level og word level. Hovedforskjellen på disse er at record level kun holder lister for hvilket dokument et ord befinner seg i. Mens word level holder styr på både hvilke dokument ordet befinner seg i og hvilken lokasjon det har i dokumentet. Word level har på grunn av dette mer funksjonalitet, men krever mer tid og plass for å lages. En funksjon som tilbys er blant annet muligheten til å søke på grunnlag av fraser eller sammensettninger av verdier.
+
+\subsection{Data Retrieval}
+Data retrieval eller data gjenfinning er prosessen for å hente ut data fra en database. Det involverer å hente ut ønsket og spesifikk data. Man vet at dataen er der og gjør dette med en spesifikk spørring som har et sett med kriterier. Som regel er dette gjort mot en DBMS(Database Managment System) eller et database kontroll verktøy som returnerer data basert på din spørring. Spørringen gjøres gjerne med et Query språk som SQL som er et mye brukt standardisert språk til formålet.
+
+\subsection{Structured data}
+Strukturert data er enkelt og greit data som er strukturert. En annen måte å forklare det på er at dataen er satt i et system som gjør at det er mulig å identifisere og hente frem dataen igjen enkelt. Den vanligste måten å strukturere data på er ved å bruke en database.  
+
+\section{Oppgave 2}
+\subsection{Term Frequency}
+Term frequency er et konsept hvor man rangerer dokumenter etter en numerisk verdi man regner ut basert på hvor mange ganger en frase dukker opp i dokumentet. Det er vanlig å først elminiere alle dokumenter som ikke inneholder alle ordene i frasen man søker etter, for så deretter å telle antall ganger ord fra frasen dukker opp i dokumentet.
+
+\subsection{Inverse Document Frequency}
+Inverse Document Frequency er en slags addisjon til TF som ordner opp i problemet med at noen ord brukes veldig mye men ikke nødvendigvis gir noen verdi til søket og kan også virke negativt. Dette er typsik ord som foreksempel en, et, og, i og å, da disse ordene har en tendens til å forekomme mange ganger i dokumenter. Derfor i IDF blir det lagt inn faktorer som rydder unna ord som forekommer veldig ofte.
+
+\subsection{Meningen med TF-IDF}
+Formålet med TF-IDF som kombinasjon er å ha en veldig simpel rangerings funksjon som kan enkelt regne ut hvilket dokument som kan være mest aktuelt basert på en frase, uten å bli påvirket av ord som forekommer for mange ganger. 
+Man kan også bruke TF-IDF veldig simpelt og veldig avansert, hvor en av de simple måtene er å enkelt og greit kun summere TD-IDF verdien for hver term i spørringen/frasen. De fleste avanserte metodene er basert på den enkle.
+\pagebreak
+
+\section{Oppgave 3}
+\subsection{Den boolske modellen}
+Den boolske modellen er en av de klassiske similaritetsmodellene. Modellen er basert på mengdelære og boolsk algebra.  Med modellen anser man dokumentene og spørringene som mengder med termer, hvor resultatet av spørringene blir basert på om en term er i et dokument, og oppfyller kravene i spærringene.  Dette betyr at en spørring må være et boolsk utrykk med operandene AND, NOT, OR.  For å illustrere dette generelt: 
+
+\vspace{5mm}
+Gitt en mengde med dokumenter D=\{d1,d2,d3,d4\} og en mengde med termer K= \{t$_{a}$,t$_{b}$,t$_{c}$\}. Dokumentene er d1=\{t$_{a}$\},  d2=\{ t$_{a}$,t$_{b}$ \}, d3=\{ t$_{a}$,t$_{c}$\} og d4=\{ t$_{a}$,t$_{b}$,t$_{c}$\}. La spørringen være q = t$_{a}$  $\land$ (t$_{b}$ $\neg$t$_{c}$)  Denne spørringen kan vi skrive om til [q$_{DNF}$ = (1,1,0) $\lor$ (1, 0, 0) $\lor$ (1, 1, 1)]. Ut ifra denne spørringen ser fra tabellen at vi at dokumentene d1, d2 og d4 stemmer overens med spørringen. Dette er fordi similariteten mellom dokument d$_{x}$ og spørringen q er sann.  
+
+\begin{center}
+    \begin{tabular}{|l|r|r|r|r|r|}
+            \hline
+            A(t, b) & d1    & d2    & d3    & d4\\
+            \hline
+            ta  &   1   &   1   &   1   &   1\\
+            \hline
+            tb  &   0   &   1   &   0   &   1\\
+            \hline
+            tc  &   0   &   0   &   1   &   1\\
+            \hline
+    \end{tabular}
+\end{center}
+
+Similariteten blir gitt ved formelen: 
+
+\begin{numcases}{sim(d_x, q)=}
+    1  &   hvis $\exists$q$_{DNF}$ $\mid$ q$_{DNF}$ = d$_{x}$ \\
+    0  &   ellers
+\end{numcases}
+
+Så hvis sim(d$_{x}$, q) = 1 er dokumentet relevant, og returneres. Er den 0 er dokumentet ikke relevant. 
+
+\vspace{5mm}
+
+Som følge av denne boolske algebraen får modellen et par ulemper. For det første vil det være umulig å rangere dokumentene. Et dokument som returneres er kun garantert å oppfylle og inneholde de termene det søkes etter. For det andre er det vanskelig for en del brukere å utføre en spørring, da spørring må være et boolsk utrykk. Som følge av den boolske algebraen vil modellen heller ikke ta hensyn til et delvis treff. I vårt eksempel vil for eksempel et dokument d5=\{t$_{a}$,t$_{c}$\} ikke returneres som treff, selv om ta er sann. Spørringene vil også være for enkle til å kunne garantere et relevant dokument. Som konsekvens av alle disse ulempene vil modellen kunne returnere enten for få, eller for mange dokumenter i forhold til brukerens spørring. 
+\let\thefootnote\relax\footnote{Modern Information Retrieval, 2nd edition, page 65}
+\pagebreak
+
+\subsection{Vektormodellen}
+For å bøte med den boolske modellens mangel av mulighet til å kunne rangere dokumenter og ta hensyn til delvis treff kom man med Vektor-modellen.  Med modellen representeres dokumenter og spørringer som vektorer, og man regner ut cosinus mellom vektorene for å finne en vekt man kan representere dokumentet med, for å rangere det mot andre dokumenter i samme spørring.  La oss illustrere dette generelt:
+
+\vspace{5mm}
+
+Gitt en mengde dokumenter D=\{d1, d2\} hvor dokumentene er d1=\{NTNU, Trondheim, Universitet\} og d2=\{UiO, Oslo, Universitet\}. Da blir K=\{Universitet, NTNU, UiO, Trondheim, Oslo\}. La oss  si at spørringen vår er q = ”Universitet, Trondheim”.  Da lager vi vektoren til d1 basert på hvor ofte ordene i K er i d1: $\vec{d1}$ = \{1, 1, 0, 1, 1\}. Vi gjør det samme for d2: $\vec{d2}$ = \{1, 0, 1, 0, 1\}. Vi lager også en vektor for q: $\vec{q}$ = \{1, 0, 0, 1, 0\}. Deretter regner vi ut similariteten ved å regne ut cosinus mellom vektoren til spørringen og hver av dokumentene for seg sim($\vec{d1}$, $\vec{q}$) og sim($\vec{d2}$, $\vec{q}$). 
+
+\vspace{5mm}
+
+$sim(\overrightarrow{d1}, \overrightarrow{q}) = \frac{1\times1+1\times0+0\times0+1\times1+1\times0}{\sqrt{1^2+1^2+0^2+1^2+1^2}\times\sqrt{1^2+0^2+0^2+1^2+0^2}} = 0,707$
+\vspace{2mm}
+
+$sim(\overrightarrow{d2}, \overrightarrow{q}) = \frac{1\times1+0\times0+1\times0+0\times1+1\times0}{\sqrt{1^2+0^2+1^2+0^2+1^2}\times\sqrt{1^2+0^2+0^2+1^2+0^2}} = 0,408$
+\vspace{5mm}
+
+Som vi ser av dette ville vi rangert d1 over d2, da sim($\vec{q}$, $\overrightarrow{dx}$) er mellom 0 og 1, hvor 1 er best. 
+
+\vspace{5mm}
+
+Vektor-modellen har ulike styrker. Hovedstyrken ligger i at termene ikke vektes binært, men ved hjelp av vektorer som gir et mer presist resultat. Videre er gjør dette at det blir mye lettere å rangere dokumentene, da man kan gi dokumentene en similaritetsverdi basert på vektoren til spørringen og vektoren til dokumentet. Dette gjør det også mulig å rangere og finne dokumenter med delvis treff. Modellen har også endel svakheter. For det første må søkeordene være presise for å kunne finnes i dokumentet. Modellen anser også alle termer som uavhengige. Dette vil i språk med ordeling medføre at ord mistolkes, og iverstefall ikke blir regnet som et treff. 
+
+
+\let\thefootnote\relax\footnote{Modern Information Retrieval, 2nd edition, page 78}
+\pagebreak
+
+\subsection{Utregninger}
+
+\subsubsection{Deloppgave 1:}
+
+Det første vi gjør er å lage en tabell som holder styr på hvilke termer som er i hvilket dokumentet. Dette for å enklere visualisere hvilke dokument som tilfredstiller spørringen. 
+
+\vspace{2mm}
+
+\begin{center}
+    \begin{tabular}{|l|r|r|r|r|r|r|r|}
+        \hline
+        A(t,d)&doc1&doc2&doc3&doc4&doc5&doc6&doc7\\
+        \hline
+        Trondheim&0&0&1&1&0&0&1\\
+        \hline
+        NTNU&1&1&0&1&1&0&1\\
+        \hline
+        Computer&0&1&0&1&1&1&0\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\vspace{5mm}
+
+Videre skriver vi om spørringene til disjunktiv normalform (DNF) for å se hvilke dokument som tilfredstiller spørringen. For eksempel ser vi her at q1$_{DNF}$ = (0,0,1), (1,0,1). Dette er de mulige dokumentene som vil stemme med spørringen q1 = "Computer NOT NTNU". Ved å se i tabellen ser vi at det kun er doc6 som tilfredstiller denne spørringen.  
+
+
+\vspace{5mm}
+
+K=\{Trondheim, NTNU, Computer\}
+
+q1$_{DNF}$ = (0,0,1), (1,0,1) $\rightarrow$ doc6
+
+q2$_{DNF}$ = (1, 1, 0), (1, 1, 1) $\rightarrow$ doc7, doc4
+
+q3$_{DNF}$ = (1, 0, 0), (0, 0, 1), (1, 1, 0), (0, 1, 1) $\rightarrow$ doc3, doc6, doc7, doc5
+
+q4$_{DNF}$ = (0, 1, 0), (1, 1, 0), (0, 1, 1) $\rightarrow$ doc1, doc7, doc2
+
+\vspace{10mm}
+
+\subsubsection{Deloppgave 2:}
+
+Dimensjonen i vektor-modellen gitt i oppgaven vil være tre, da $\mid$K$\mid$ = 3
+
+
+\pagebreak
+
+\section{Oppgave 4}
+
+Dokumentsett D:
+\vspace{1mm}
+
+doc1 = NTNU
+
+doc2 = NTNU, Computer
+
+doc3 = Trondheim
+
+doc4 = Trondheim, NTNU, Computer, NTNU, Trondheim
+
+doc5 = NTNU, NTNU, NTNU, Computer
+
+doc6 = Computer
+
+doc7 = Trondheim, NTNU, NTNU, Trondheim, Trondheim 
+\vspace{5 mm}
+
+
+Tabellen under viser term frekvensen $tf_{(t,d \in D)}$ for hvert av dokumentene i dokumentsettet D, hvor $t \in T$.
+\vspace{5 mm}
+
+\begin{center}
+\begin{tabular}[t]{|l|ccccccc|}
+
+\multicolumn{8}{c}{term-frequnencies for document list a terms:}\\\hline
+
+Term&\ $tf_{(t,1)}$&\ $tf_{(t,2)}$&\ $tf_{(t,3)}$&\ $tf_{(t,4)}$&\ $tf_{(t,5)}$&\ $tf_{(t,6)}$&\ $tf_{(t,7)}$\\\hline
+
+Trondheim&-&-&1&2&-&-&3\\
+
+NTNU&1&1&-&2&3&-&2\\
+
+Computer&-&1&-&1&1&1&-\\\hline
+\end{tabular}
+\end{center}
+\vspace{10 mm}
+
+\begin{center}
+
+Inverse document frequency:
+\vspace{5 mm}
+$idf(t, D) = \lg(\frac{|D|}{t \in D})$
+
+\vspace{5 mm}
+
+$idf(Trondheim, D) = \lg(\frac{7}{3}) = 0,368$
+\vspace{5 mm}
+
+$idf(NTNU, D) = \lg(\frac{7}{5}) = 0,146$
+\vspace{5 mm}
+
+$idf(Computer, D) = \lg(\frac{7}{4}) = 0,243$
+
+\end{center}
+
+%\vspace{10 mm}
+\let\thefootnote\relax\footnote{Modern Information Retrieval, 2 edition, page 68-75}
+\pagebreak
+
+
+\begin{center}
+$tf-idf_{(t,d,D)} = tf_{(t,d)} \times idf_{(t,D)}$
+\vspace{5 mm}
+
+\begin{tabular}[t]{|l|ccccccc|}
+
+\multicolumn{8}{c}{term frequency-inverse document frequency:}\\\hline
+
+Term&\ $d_1$&\ $d_2$&\ $d_3$&\ $d_4$&\ $d_5$&\ $d_6$&\ $d_7$\\\hline
+
+Trondheim&-&-&0,367&0,735&-&-&1,104\\
+
+
+NTNU&0,146&0,146&-&0,292&0,438&-&0,292\\
+
+Computer&-&0,243&-&0,243&0,243&0,243&-\\\hline
+\end{tabular}
+\end{center}
+
+\vspace{10 mm}
+dokumenter som skal sammenlignes med $\overrightarrow{d2} = \{0,1,1\}$:
+\vspace{2 mm}
+
+\indent\indent$\overrightarrow{d1} = \{0,1,0\}$
+
+\indent\indent$\overrightarrow{d4} = \{2,2,1\}$
+
+\indent\indent$\overrightarrow{d5} = \{0,3,1\}$
+
+\indent\indent$\overrightarrow{d6} = \{0,0,1\}$
+
+\indent\indent$\overrightarrow{d7} = \{3,2,1\}$
+
+\vspace{10 mm}
+
+Euclidean distance:
+\vspace{2 mm}
+ 	
+$D_{(\overrightarrow{d1},\overrightarrow{d2})} = 1- \frac{0\times0+1\times1+0\times1}{\sqrt{1^2}\times\sqrt{1^2+1^2}} = 1 - \frac{1}{\sqrt{1}\times\sqrt{2}} = 0,2928$
+\vspace{2 mm}
+
+$D_{(\overrightarrow{d4},\overrightarrow{d2})} = 1 - \frac{2\times0+2\times1+1\times1}{\sqrt{2^2+2^2+1^2}\times\sqrt{1^2+1^2}} = 1 - \frac{3}{\sqrt{5}\times\sqrt{2}} = 0,0513$
+\vspace{2 mm}
+
+$D_{(\overrightarrow{d5},\overrightarrow{d2})} = 1 - \frac{0\times0+3\times1+1\times1}{\sqrt{3^2+1^2}\times\sqrt{1^2+1^2}} = 1 - \frac{4}{\sqrt{10}\times\sqrt{2}} = 0,1055$
+\vspace{2 mm}
+
+$D_{(\overrightarrow{d6},\overrightarrow{d2})} = 1 - \frac{0\times0+0\times1+1\times1}{\sqrt{1^2}\times\sqrt{1^2 + 1^2}} = 1 - \frac{1}{\sqrt{1}\times\sqrt{2}} = 0,2928$
+\vspace{2 mm}
+
+$D_{(\overrightarrow{d7},\overrightarrow{d2})} = 1 - \frac{3\times0+2\times1+1\times1}{\sqrt{3^2+2^2+1^2}\times\sqrt{1^2+1^2}} = 1 - \frac{3}{\sqrt{14}\times\sqrt{2}} = 0,4330$
+\vspace{10 mm}
+
+Dokument rangeringen fra størst til minst likhet:
+\vspace{2 mm}
+
+\indent\indent$d_4$, $d_5$, $d_1$, $d_6$, $d_7$
+\vspace{1 mm}
+
+\indent\indent merk at $d_1$, $d_6$ rangeres helt likt.
+\vspace{20 mm}
+\let\thefootnote\relax\footnote{Modern Information Retrieval, 2 edition, page 223}
+
+\end{document}

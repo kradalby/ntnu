@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Graphics and animation using HTML5 Canvas</title>
+        <style>
+            #the-canvas { border: 1px dashed gray }   
+        </style>
+        <script>
+            addEventListener('load', function() {
+                var can = document.getElementById("the-canvas")
+                var pupp = can.getContext("2d")
+                var circle = {centerX:200, centerY:200, radius:100, angle:0};
+                var img = {x:0,y:0, speed:.05};
+
+
+                window.setInterval(function() {
+                    can.width = can.width;
+                    pupp.fillStyle = "3300FF"
+                    pupp.fillRect(0,0,150,75)
+
+                    pupp.beginPath()
+                    pupp.arc(300, 300, 40, 0, (2 * Math.PI))
+                    pupp.fillStyle = "#F80000"
+                    pupp.stroke()
+                    pupp.fill()
+
+                    img.x = circle.centerX + Math.cos(circle.angle) * circle.radius
+                    img.y = circle.centerY + Math.sin(circle.angle) * circle.radius
+                    circle.angle += img.speed
+                    var imgObj = new Image()
+                    imgObj.onload = function() {
+                        pupp.drawImage(imgObj, img.x, img.y)
+                    }
+                    imgObj.src = "doge.jpg"
+                        
+                
+
+                }, 20)
+
+
+            });
+        </script>
+    </head>
+    <body>
+        <canvas id="the-canvas" width="500" height="400">   
+            Your browser does not support the &lt;canvas&gt; element.
+        </canvas>
+    </body>
+</html>

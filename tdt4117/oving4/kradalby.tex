@@ -1,0 +1,28 @@
+\section*{Task 1 - Miscellaneous}
+
+\subsection*{Task A}
+\subsubsection*{Centralized crawler-indexer architecture}
+Er en sentralisert måte å prosessere spørringer og indekser. I denne arkitekturen blir det brukt en sentral server til å kontrollere webcrawlers. Arkitekturen er enkel å vedlikehold og håndtere ettersom det er lite elementer involvert i denne prosessen. Det er dessverre andre problemer med arkiteturen, som single point of failure. Et målrettet angrep mot en server kan for eksempel ta ned hele systemet.
+
+\subsubsection*{Distributed crawler-indexer architecture}
+En distribuert arkitektur bruker i motsettning til sentralisert mange noder til å fordele arbeidsmengden og kan takle problemene på en annen måte fra flere steder. Det er ikke lenger et problem om en node skulle gå ned, men det er vanskligere å faktisk håndtere og organisere systemet.
+
+\subsection*{Task B}
+\subsubsection*{Document preprocessing}
+Stegene i Dokument preprossessering er:
+
+\subsubsection*{Steg 1 - Lexical analyse}
+Lexical analyse går ut på å behandle mellomrom, nummer og tegn i en tekst, med formål om å gjøre en samling av karakterer til samlinger med ord. For eksempel skal "state-of-the art" og "state of the art" behandles på samme måte da det har samme betydning.
+
+\subsubsection*{Steg 2 - Eliminere stoppord}
+Eliminasjon av stoppord går ut på å fjerne ord som kan ødelegge indekseringen fordi de er ubetydlige i indekserings sammenheng og forekommer for mange ganger. Eksempler på stoppord i norsk som ofte blir fjernet er: i, og, å, er.
+
+\subsubsection*{Steg 3 - Stemming}
+Stemmning handler om å behandle ord med hvor man har et ord som er stammen til en rekke andre ord, gjerne hvor endelsen er annerledes. Et eksempel på dette er ordet tilkoble som er stammen til, tilkoblinger, tilkobler, tilkoblingene.
+
+\subsubsection*{Steg 4 - Valg av indeks termer}
+Valg av indeks termer handler som navnet tilsier at man skal velge hvilke termer som skal brukes. Man må gjerne velge hvor mange termer man skal bruke og hvor spesifikke disse skal være. Dette bestemmer hvor dyp indekseringen skal være.
+Her er det vanlig å gruppere subjektiv og behandle subjektiv som forekommer nær hverandre som et enkelt element. Som foreksempel computer science.
+
+\subsubsection*{Steg 5 - Konstruksjon av term kategoriserte strukturer}
+I dette steget skal man strukturere gruppene og termene man valgte i forrige steg. En måte å organisere dette er i en tesaurus. En tesaurus er en struktur på et kontrollert vokabular der termene står i relasjon til hverandre.

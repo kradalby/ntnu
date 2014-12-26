@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6, #articleHeader {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+}
+
+body > header {
+    background-color: black;
+    width: 100%;
+    color: white;
+    text-align: center;
+    height: 90px;
+}
+
+body > header > h1 {
+    padding: 10px 0 0 0;
+    margin: 0 0 0 0;
+} 
+
+body > header > h4 {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+} 
+
+
+#main {
+    width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+articleTitle {
+    font-weight: bold;
+}
+
+#articleHeader {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 15px 0 35px 0;
+}
+
+#byline {
+    font-size: 12px;
+}
+
+img {
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #030303
+}

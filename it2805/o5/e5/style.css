@@ -1,0 +1,45 @@
+h1 {
+    font-size: 50px;
+    text-align: center;
+    margin: 0;
+}
+
+nav > ul > li {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 20px;
+    list-style-type: none;
+    margin: 5px 0 5px 0;
+    padding: 0;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    color: #EA86F0;
+    
+}
+nav > ul > li > a:hover {
+    text-decoration: underline;
+}
+
+nav > ul {
+    text-align: center;
+}
+
+.yolo50 {
+    display: inline-block;
+    width: 48%
+}
+
+clear {
+    clear: both;
+}
+
+footer {
+    text-align: center;
+}
+
+table, td, th {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
