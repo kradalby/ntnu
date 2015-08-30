@@ -1,0 +1,38 @@
+# Problem set 1 - MPI Intro
+
+## Part 1 - Theory
+
+### Problem 1 - General Theory
+
+a)
+
+Flynn's Taxonomy:
+
+**SISD**: Single Instruction Single Datastream describes a system what can only do one instruction at the time, and all data is received from the same stream. A machine with one CPU and one main memory will fitt here, like the classic von Neumann.
+
+**SIMD**: Single Instruction Multiple Datastream describes a system which can do the same single instruction on multiple ALUs, with each ALU working on different data. A GPU is a good example of a SIMD implementation.
+
+**MISD**: Multiple Instruction Single Datastream describes a system where multiple ALUs/functional units perform different operations on the same data. This is not a widely used architecture.
+
+**MIMD**: Multiple Instruction Multuple Datastream describes a system where all the different processors/ALUs can function independently. Each processor can work on different instructions and different datastreams.
+
+MPI fits into Flynn's Taxonomy within SIMD and MIMD. MPI is used for sending messages between the different instances of the instruction/program. It is not however needed in MISD and SISD.
+
+b)
+
+
+c)
+
+
+### Problem 2 - Code Theory
+
+a)
+
+i)
+ii)
+
+
+b)
+
+i)
+ii)
