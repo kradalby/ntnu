@@ -19,10 +19,10 @@ Flynn's Taxonomy:
 MPI fits into Flynn's Taxonomy within SIMD and MIMD. MPI is used for sending messages between the different instances of the instruction/program. It is not however needed in MISD and SISD.
 
 b)
-
+MPI selects the fastest available communication channel between two processes and and if two instances of the same program runs on the same node, shared memory is typically used to achieve the highest performance.
 
 c)
-
+MPI can also use distributed memory and will try to find the fastest connection available to achieve this. For example, when using Vilje, each node is connected with Infiniband to provide higher performance and coupling between the nodes. If technology like Infiniband is not available it will fall back to for example TCP/IP network.
 
 ### Problem 2 - Code Theory
 
