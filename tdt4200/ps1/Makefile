@@ -18,3 +18,5 @@ run_para: para
 
 clean:
 	rm -f serial
+
+all: run_para

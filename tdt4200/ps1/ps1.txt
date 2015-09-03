@@ -29,10 +29,44 @@ MPI can also use distributed memory and will try to find the fastest connection 
 a)
 
 i)
+When running on the ITS machine, the only communication needed is between the actual processor and therefor the bottleneck is minimal. If the exercise is runned on Vilje, or another distributed system, the bottleneck between the different nodes will be higher than between processors.
 ii)
+Higher connectivity between the servers would reduce the bottleneck. If there is a implementation way to do this, i am not aware of it.
 
 
 b)
 
 i)
+First i thought that there might be a computational bottleneck if the computed local ranges would be for example be splitt equally from bottom to top. E. g. If a range from 2 to 1000 would be splitted on 4 processes. Then a split with the 2-252, 253-500, 501-750, 751-1000 would be bad. This is because the first range would be finished way before the rest.
+
+ii) 
+As i discovered the bottleneck i tried to describe in the proviuse task, i implemented the split so each process takes the next integer in a queue like manner. E. g.
+
+Process one: 2, 6, 10 ....
+Process two: 3, 7, 11 ....
+Process three: 4, 8, 12 ....
+Process four: 5, 9, 13 ....
+
+I think this aproach would be a little more efficient.
+
+## Part 2 - Code
+
+### Problem 1 - MPI Intro
+
+a) See the computeMPI.c file.
+It is not optimally implemented as one process is per now used only for management. But i ran out of time.
+
+b) See the Makefile.
+
+c) 
+
+i)
+
 ii)
+
+iii)
+
+iv)
+
+v)
+
