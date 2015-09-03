@@ -56,8 +56,8 @@ start is 2 or greater, and end is greater than start.\n");
         rest = 0;
     }
 
-    int local_start = start+rank*local_range;
-    int local_stop = start+(rank+1)*local_range+rest;
+    //int local_start = start+rank*local_range;
+    //int local_stop = start+(rank+1)*local_range+rest;
 
     //printf("%d %d\n", local_start, local_stop);
 
