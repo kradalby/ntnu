@@ -32,7 +32,11 @@ start is 2 or greater, and end is greater than start.\n");
 	// Perform the computation
 	double sum = 0.0;
 	for (int i = start; i < stop ; i++) {
-		sum += 1.0/log(i);
+        double test = 1.0/log(i);
+        //printf("index: %d\n", i);
+        //printf("result: %f\n", test);
+		sum += test;
+        //printf("calculated: %f\n", sum);
 	}
 
 	// Debug prints if needed
