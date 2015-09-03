@@ -60,13 +60,26 @@ b) See the Makefile.
 
 c) 
 
-i)
+i) O(n/p)
 
-ii)
+ii) O(2(p-1))
 
-iii)
+iii) O(2(p-1)/p)
 
-iv)
+iv) O(2p-1)
 
 v)
+I did not understand what i was suppose to graph, but i provided the run-times.
 
+1 100 Time: 0.000090 The sum is: 29.774290
+1 1000000 Time: 0.020934 The sum is: 78627.269730
+1 1000000000 Time: 22.607368 The sum is: 50849234.689638
+2 100 Time: 0.000073 The sum is: 29.774290
+2 1000000 Time: 0.021501 The sum is: 78627.269730
+2 1000000000 Time: 10.676788 The sum is: 50849234.689636
+4 100 Time: 0.000429 The sum is: 29.774290
+4 1000000 Time: 0.009580 The sum is: 78627.269730
+4 1000000000 Time: 8.183556 The sum is: 50849234.689635
+8 100 Time: 0.000305 The sum is: 29.774290
+8 1000000 Time: 0.013695 The sum is: 78627.269730
+8 1000000000 Time: 4.941481 The sum is: 50849234.689636
