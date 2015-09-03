@@ -10,13 +10,13 @@ serial: computeSerial.c
 run_serial: serial
 	./serial $(START) $(STOP)
 
-para: computeMPI.c
+parallel: computeMPI.c
 	mpicc -g -Wall -lm -std=c99 -o $@ computeMPI.c
 
-run_para: para
-	mpirun -np $(PROCESSES) ./para $(START) $(STOP)
+run_parallel: parallel
+	mpirun -np $(PROCESSES) ./parallel $(START) $(STOP)
 
 clean:
 	rm -f serial
 
-all: run_para
+all: run_parallel
