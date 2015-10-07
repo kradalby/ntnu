@@ -44,17 +44,17 @@ start is 2 or greater, and end is greater than start.\n");
     //printf("Number of process: %d\n", size);
 
     // TODO: Compute the local range, so that all the elements are accounted for.
-    double local_range = (stop - start) / size;
+    //double local_range = (stop - start) / size;
 
     double total_sum = 0.0;
     double local_sum = 0.0;
-    double rest = 0.0;
+    //double rest = 0.0;
 
-    if (rank == size - 1) {
-        rest = (stop - start) % size;
-    } else {
-        rest = 0;
-    }
+    //if (rank == size - 1) {
+    //    rest = (stop - start) % size;
+    //} else {
+    //    rest = 0.0;
+    //}
 
     //int local_start = start+rank*local_range;
     //int local_stop = start+(rank+1)*local_range+rest;
@@ -62,6 +62,8 @@ start is 2 or greater, and end is greater than start.\n");
     //printf("%d %d\n", local_start, local_stop);
 
     //printf("Running calculate on %d to %d\n", start, stop);
+    double starttime, stoptime;
+
     if (rank != 0) {
         for (int i = start+rank-1; i < stop; i += size - 1) {
             double test = 1.0/log(i);
@@ -74,12 +76,15 @@ start is 2 or greater, and end is greater than start.\n");
 
     // Perform the computation
     if (rank == 0) {
+	starttime = MPI_Wtime();
         double recv_sum = 0.0;
         for (int worker = 1; worker < size; worker++) {
             MPI_Recv(&recv_sum, 1, MPI_DOUBLE, worker, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             total_sum += recv_sum;
         }
-        printf("The sum is: %f\n", total_sum);
+	stoptime = MPI_Wtime();
+	//printf("Time: %f\n", stoptime - starttime);
+        printf("%f\n", total_sum);
     } else {
         MPI_Send(&local_sum, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
     }
