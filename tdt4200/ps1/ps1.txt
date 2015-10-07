@@ -36,3 +36,24 @@ b)
 
 i)
 ii)
+
+## Part 2 - Code
+
+### Problem 1, MPI intro
+
+a) See code
+
+b) See make
+
+c)
+
+i)
+
+ii)
+
+iii)
+
+iv)
+
+v)
+
