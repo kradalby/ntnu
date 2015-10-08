@@ -31,8 +31,8 @@ for size in [1, 2, 4, 8, 16, 32]:
             f.write(BLOCK)
 
         f.flush()
+        os.fsync(f.fileno())
         os.system('sync')
-        #os.fsync(f)
         stop = time.clock()
 
         interval = stop - start
