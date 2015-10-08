@@ -11,3 +11,5 @@ a.out
 *.xcodeproj/
 *.xcworkspace/
 TSWLatexianTemp*
+
+~$*
