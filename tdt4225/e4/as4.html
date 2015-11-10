@@ -1,0 +1,98 @@
+<h1>Assignment 4</h1>
+<h2>1.</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>R</th>
+<th>A</th>
+<th>B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Records</td>
+<td>1 000 000</td>
+<td>1 000 000</td>
+<td>10 000 000</td>
+</tr>
+<tr>
+<td>Record length</td>
+<td></td>
+<td>400B</td>
+<td>600B</td>
+</tr>
+<tr>
+<td>Fetched B</td>
+<td>600B</td>
+<td>300B</td>
+<td>300B</td>
+</tr>
+<tr>
+<td>Volume MB</td>
+<td>600MB</td>
+<td>400MB</td>
+<td>6000MB</td>
+</tr>
+<tr>
+<td>NettoVolume MB</td>
+<td></td>
+<td>300MB</td>
+<td>3000MB</td>
+</tr>
+</tbody>
+</table>
+<h3>Without filter:</h3>
+<p>n = ceil(VA/M) = ceil(300/20) = 15</p>
+<p>VJnl = VA + nVB + VR</p>
+<p>VJnl = 400 * (15 * 6000) + 600 = 91000 MB = 91GB</p>
+<h3>With filter:</h3>
+<p>A = Volume of A as MB</p>
+<p>A' = Netto Volume of A as MB</p>
+<p>Read A = 400MB, Write A' = 300MB</p>
+<p>Read B = 6000MB, Write part B' (1/3) = 1000MB</p>
+<p>Read A' and B' = 1300MB, Write A * B = 2000MB</p>
+<p>VR = 600MB</p>
+<p>Total = 400 + 300 + 6000 + 1000 + 1300 + 2000 + 600 = 11600MB</p>
+<h2>2.</h2>
+<h3>a)</h3>
+<p>In the compendium by K. Bratsbergengen, i cannot find any elaboration on the vertical fragmentation topic. I will therefore only elaborate about the three location selection mechanisms mentioned for horizontial fragmentation:</p>
+<ul>
+<li>Value ranges: A node is given a value range spesific to the node, which it is responsible for.</li>
+<li>Round Robin: Records in all nodes are placed in a circular manner.</li>
+<li>Hashing: Records are places in an address based on a hash algorithm. The primary key is used for input in the hash algorithm.</li>
+</ul>
+<h3>b)</h3>
+<p>Hashing is a good method due to its properties. Hashing will in most cases make lookup go fast and distribute the data evenly. It also easily allows for parallel execution. Hashing will also not require any indexing.</p>
+<h2>3.</h2>
+<h3>Consistent hashing</h3>
+<p>Dynamo has a consept of Node which data can be assigned to, and the nodes is organised in a ring. Data is assigned to each nod by hashing the key of the data item and using the hash as a position on the ring. Every node is responsible for all the data items on the ring between itself and its predecessor.
+Dynamo also creates virtual nodes to handle the possibility of difference in node performance or to handle the possibility of loss of nodes. Each ring has a lot of virtual nodes, and each virtual node is assigned/controlled by a physical node.
+When a node goes down, the virtual nodes can be redistribued of the available node, and if more nodes is added, virtual nodes can be offloaded by redistribution again.</p>
+<p>Since data needs to be redundant. A node coordinates its own data and replicates it to the next N-1 nodes in the ring.</p>
+<h3>Vector clocks</h3>
+<p>Vector clocks is used for versioning objects in Dynamo. The vector clock is a counter which is paired with each node in the database.</p>
+<h3>Sloppy quorum</h3>
+<p>To implement sloppy quorum, read and writes are done to the first N healthy nodes. The healty nodes must not be next in the ring. Sometimes the node that should be the master node of the replica is down, and it will be saved to another node. If so, it the replica will contain information about where it should reside so it can be moved at a later time.</p>
+<h3>Merkle trees</h3>
+<p>A Merkel tree is a special kind of tree where each node is a hash of the values to individual keys. Dynamo maintains a Merkel tree on each node for each of the nodes virtual nodes. The synchronizatin of two nodes require the nodes to start by exhangeing the root of the Merkel tree for the range of keys that they have in common.</p>
+<h3>Gossip-based membership protocol</h3>
+<p>To ensure that each node has each node has a persisted membership change history, the gossip-based membership protocol is implemented. The protocol makes each node contact a randomly selected peer every second.</p>
+<h2>4.</h2>
+<h3>a)</h3>
+<p>How does RamClouds ensure «durability» of data?</p>
+<p>RamCloud is stored in DRAM which is fast, but volatile, which is a big case when we think about powerfailures and other outages.
+RamCloud counters this by using what the calles "buffered logging". This technology uses a copy of the data on multiple servers. To ensure presistancy, the data is written to one server, and then sent to other servers and temorarily stored in DRAM. When the other servers acknolegedes and confirms that the data is stored, the write operation is confirmed to the user.</p>
+<h3>b)</h3>
+<p>How does Ousterhout argue that RAMCloud’s potential to support ACID transactions is better than for traditional disk-based distributed databases?</p>
+<p>Ousterhout argues that RamCloud has better ACID potential than traditional disk-based storage because of the lower latency of DRAM. ACID's properties is mostly built for handling the possible problems of concurrent transactions. As DRAM is much faster than traditional storage, the risk of conflict is reduced.</p>
+<h2>5.</h2>
+<p>How does Facebook TAO solve the problem that the social graph spans the whole world, and that
+the data should be close to the user?</p>
+<p>Facebook Tao solves the distributed storage problem of its social graph by splitting the data into hundres of thousands of "shards". A shard is a set of data that is contained in a logical database. A database server (MySQL) is responsible for one or more shards. Facebook runs TAO as a single-master per shard and rely on MySQL replication to propegate updates from a regional datacenter to all other regions, known as slave regions. A slave cannot update the persistant storage of a shard by itself, it will forward the request to the master for the spesific shard which will update and replicate it out to the slaves.</p>
+<p>Typically a master for user data is choosen based on geographical data, so that the master is usually close to the origin of the request.</p>
+<h2>6.</h2>
+<p>Google Spanner uses timestamps for everything. It acutally stores the data on the format <key:value, timestamp:int64>, which one can say is a deep and important integration.</p>
+<p>First, the time implementation in Spanner, known as TrueTime (TT), is a clock that is fetched from GPS and Atomic clocks. The TT.now() function returns the current time, but in a slightly unconventional way. The current time is a interval between the earliest possible time and the latest possible time the current time can be, covering the possible inaccurecy of the time in to account.</p>
+<p>The .now is complemented with .after and .before which returns True if the time given is guaranteed after or before, respectivly.</p>
+<p>The user of the intervals will make spanner slow down to make sure that there is no local time conflict with the global time system and therefore provide a reliable timestamp for each transaction.</p>
